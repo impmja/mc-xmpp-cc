@@ -12,10 +12,10 @@
 		3DAC3F10171D98DA00A36A2B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0F171D98DA00A36A2B /* CoreGraphics.framework */; };
 		3DAC3F16171D98DA00A36A2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */; };
 		3DAC3F18171D98DA00A36A2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC3F17171D98DA00A36A2B /* main.m */; };
-		3DAC3F1C171D98DA00A36A2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC3F1B171D98DA00A36A2B /* AppDelegate.m */; };
-		3DAC3F1E171D98DA00A36A2B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F1D171D98DA00A36A2B /* Default.png */; };
-		3DAC3F20171D98DA00A36A2B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F1F171D98DA00A36A2B /* Default@2x.png */; };
-		3DAC3F22171D98DA00A36A2B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F21171D98DA00A36A2B /* Default-568h@2x.png */; };
+		3DAC3F2F171D9AF400A36A2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC3F2E171D9AF400A36A2B /* AppDelegate.m */; };
+		3DAC3F33171D9B0500A36A2B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */; };
+		3DAC3F34171D9B0500A36A2B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F31171D9B0500A36A2B /* Default.png */; };
+		3DAC3F35171D9B0500A36A2B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F32171D9B0500A36A2B /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,11 +27,11 @@
 		3DAC3F15171D98DA00A36A2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DAC3F17171D98DA00A36A2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3DAC3F19171D98DA00A36A2B /* MC-XMPP-CC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MC-XMPP-CC-Prefix.pch"; sourceTree = "<group>"; };
-		3DAC3F1A171D98DA00A36A2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3DAC3F1B171D98DA00A36A2B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3DAC3F1D171D98DA00A36A2B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3DAC3F1F171D98DA00A36A2B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3DAC3F21171D98DA00A36A2B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3DAC3F2D171D9AF400A36A2B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
+		3DAC3F2E171D9AF400A36A2B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
+		3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Images/Default-568h@2x.png"; sourceTree = "<group>"; };
+		3DAC3F31171D9B0500A36A2B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Images/Default.png; sourceTree = "<group>"; };
+		3DAC3F32171D9B0500A36A2B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Images/Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +78,8 @@
 		3DAC3F11171D98DA00A36A2B /* MC-XMPP-CC */ = {
 			isa = PBXGroup;
 			children = (
-				3DAC3F1A171D98DA00A36A2B /* AppDelegate.h */,
-				3DAC3F1B171D98DA00A36A2B /* AppDelegate.m */,
+				3DAC3F17171D98DA00A36A2B /* main.m */,
+				3DAC3F2A171D996800A36A2B /* Classes */,
 				3DAC3F12171D98DA00A36A2B /* Supporting Files */,
 			);
 			path = "MC-XMPP-CC";
@@ -88,15 +88,39 @@
 		3DAC3F12171D98DA00A36A2B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3DAC3F2B171D997900A36A2B /* Resources */,
 				3DAC3F13171D98DA00A36A2B /* MC-XMPP-CC-Info.plist */,
 				3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */,
-				3DAC3F17171D98DA00A36A2B /* main.m */,
 				3DAC3F19171D98DA00A36A2B /* MC-XMPP-CC-Prefix.pch */,
-				3DAC3F1D171D98DA00A36A2B /* Default.png */,
-				3DAC3F1F171D98DA00A36A2B /* Default@2x.png */,
-				3DAC3F21171D98DA00A36A2B /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3DAC3F2A171D996800A36A2B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F2D171D9AF400A36A2B /* AppDelegate.h */,
+				3DAC3F2E171D9AF400A36A2B /* AppDelegate.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		3DAC3F2B171D997900A36A2B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F2C171D998A00A36A2B /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		3DAC3F2C171D998A00A36A2B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */,
+				3DAC3F31171D9B0500A36A2B /* Default.png */,
+				3DAC3F32171D9B0500A36A2B /* Default@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +175,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DAC3F16171D98DA00A36A2B /* InfoPlist.strings in Resources */,
-				3DAC3F1E171D98DA00A36A2B /* Default.png in Resources */,
-				3DAC3F20171D98DA00A36A2B /* Default@2x.png in Resources */,
-				3DAC3F22171D98DA00A36A2B /* Default-568h@2x.png in Resources */,
+				3DAC3F33171D9B0500A36A2B /* Default-568h@2x.png in Resources */,
+				3DAC3F34171D9B0500A36A2B /* Default.png in Resources */,
+				3DAC3F35171D9B0500A36A2B /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DAC3F18171D98DA00A36A2B /* main.m in Sources */,
-				3DAC3F1C171D98DA00A36A2B /* AppDelegate.m in Sources */,
+				3DAC3F2F171D9AF400A36A2B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +304,7 @@
 				3DAC3F27171D98DA00A36A2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

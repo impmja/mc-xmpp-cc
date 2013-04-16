@@ -1,4 +1,14 @@
 mc-xmpp-cc
 ==========
 
-Mobile Computing - XMPP Chat Client
+Project:
+
+XMPP iOS Chat Client
+
+
+Team:
+
+Jan Schulte
+Florian Kaluschke
+
+
