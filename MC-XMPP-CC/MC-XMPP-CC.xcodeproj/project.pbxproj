@@ -1,0 +1,287 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3DAC3F0C171D98DA00A36A2B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0B171D98DA00A36A2B /* UIKit.framework */; };
+		3DAC3F0E171D98DA00A36A2B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0D171D98DA00A36A2B /* Foundation.framework */; };
+		3DAC3F10171D98DA00A36A2B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0F171D98DA00A36A2B /* CoreGraphics.framework */; };
+		3DAC3F16171D98DA00A36A2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */; };
+		3DAC3F18171D98DA00A36A2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC3F17171D98DA00A36A2B /* main.m */; };
+		3DAC3F1C171D98DA00A36A2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC3F1B171D98DA00A36A2B /* AppDelegate.m */; };
+		3DAC3F1E171D98DA00A36A2B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F1D171D98DA00A36A2B /* Default.png */; };
+		3DAC3F20171D98DA00A36A2B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F1F171D98DA00A36A2B /* Default@2x.png */; };
+		3DAC3F22171D98DA00A36A2B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F21171D98DA00A36A2B /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3DAC3F08171D98DA00A36A2B /* MC-XMPP-CC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC-XMPP-CC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DAC3F0B171D98DA00A36A2B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3DAC3F0D171D98DA00A36A2B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3DAC3F0F171D98DA00A36A2B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3DAC3F13171D98DA00A36A2B /* MC-XMPP-CC-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MC-XMPP-CC-Info.plist"; sourceTree = "<group>"; };
+		3DAC3F15171D98DA00A36A2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3DAC3F17171D98DA00A36A2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3DAC3F19171D98DA00A36A2B /* MC-XMPP-CC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MC-XMPP-CC-Prefix.pch"; sourceTree = "<group>"; };
+		3DAC3F1A171D98DA00A36A2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3DAC3F1B171D98DA00A36A2B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3DAC3F1D171D98DA00A36A2B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3DAC3F1F171D98DA00A36A2B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3DAC3F21171D98DA00A36A2B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3DAC3F05171D98DA00A36A2B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DAC3F0C171D98DA00A36A2B /* UIKit.framework in Frameworks */,
+				3DAC3F0E171D98DA00A36A2B /* Foundation.framework in Frameworks */,
+				3DAC3F10171D98DA00A36A2B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3DAC3EFF171D98DA00A36A2B = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F11171D98DA00A36A2B /* MC-XMPP-CC */,
+				3DAC3F0A171D98DA00A36A2B /* Frameworks */,
+				3DAC3F09171D98DA00A36A2B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3DAC3F09171D98DA00A36A2B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F08171D98DA00A36A2B /* MC-XMPP-CC.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3DAC3F0A171D98DA00A36A2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F0B171D98DA00A36A2B /* UIKit.framework */,
+				3DAC3F0D171D98DA00A36A2B /* Foundation.framework */,
+				3DAC3F0F171D98DA00A36A2B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3DAC3F11171D98DA00A36A2B /* MC-XMPP-CC */ = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F1A171D98DA00A36A2B /* AppDelegate.h */,
+				3DAC3F1B171D98DA00A36A2B /* AppDelegate.m */,
+				3DAC3F12171D98DA00A36A2B /* Supporting Files */,
+			);
+			path = "MC-XMPP-CC";
+			sourceTree = "<group>";
+		};
+		3DAC3F12171D98DA00A36A2B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3DAC3F13171D98DA00A36A2B /* MC-XMPP-CC-Info.plist */,
+				3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */,
+				3DAC3F17171D98DA00A36A2B /* main.m */,
+				3DAC3F19171D98DA00A36A2B /* MC-XMPP-CC-Prefix.pch */,
+				3DAC3F1D171D98DA00A36A2B /* Default.png */,
+				3DAC3F1F171D98DA00A36A2B /* Default@2x.png */,
+				3DAC3F21171D98DA00A36A2B /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3DAC3F07171D98DA00A36A2B /* MC-XMPP-CC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DAC3F25171D98DA00A36A2B /* Build configuration list for PBXNativeTarget "MC-XMPP-CC" */;
+			buildPhases = (
+				3DAC3F04171D98DA00A36A2B /* Sources */,
+				3DAC3F05171D98DA00A36A2B /* Frameworks */,
+				3DAC3F06171D98DA00A36A2B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MC-XMPP-CC";
+			productName = "MC-XMPP-CC";
+			productReference = 3DAC3F08171D98DA00A36A2B /* MC-XMPP-CC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3DAC3F00171D98DA00A36A2B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Jan Schulte";
+			};
+			buildConfigurationList = 3DAC3F03171D98DA00A36A2B /* Build configuration list for PBXProject "MC-XMPP-CC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3DAC3EFF171D98DA00A36A2B;
+			productRefGroup = 3DAC3F09171D98DA00A36A2B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3DAC3F07171D98DA00A36A2B /* MC-XMPP-CC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3DAC3F06171D98DA00A36A2B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DAC3F16171D98DA00A36A2B /* InfoPlist.strings in Resources */,
+				3DAC3F1E171D98DA00A36A2B /* Default.png in Resources */,
+				3DAC3F20171D98DA00A36A2B /* Default@2x.png in Resources */,
+				3DAC3F22171D98DA00A36A2B /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3DAC3F04171D98DA00A36A2B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DAC3F18171D98DA00A36A2B /* main.m in Sources */,
+				3DAC3F1C171D98DA00A36A2B /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3DAC3F15171D98DA00A36A2B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3DAC3F23171D98DA00A36A2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3DAC3F24171D98DA00A36A2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3DAC3F26171D98DA00A36A2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MC-XMPP-CC/MC-XMPP-CC-Prefix.pch";
+				INFOPLIST_FILE = "MC-XMPP-CC/MC-XMPP-CC-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3DAC3F27171D98DA00A36A2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MC-XMPP-CC/MC-XMPP-CC-Prefix.pch";
+				INFOPLIST_FILE = "MC-XMPP-CC/MC-XMPP-CC-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3DAC3F03171D98DA00A36A2B /* Build configuration list for PBXProject "MC-XMPP-CC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DAC3F23171D98DA00A36A2B /* Debug */,
+				3DAC3F24171D98DA00A36A2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DAC3F25171D98DA00A36A2B /* Build configuration list for PBXNativeTarget "MC-XMPP-CC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DAC3F26171D98DA00A36A2B /* Debug */,
+				3DAC3F27171D98DA00A36A2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3DAC3F00171D98DA00A36A2B /* Project object */;
+}
