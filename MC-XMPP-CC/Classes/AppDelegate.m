@@ -8,14 +8,44 @@
 
 #import "AppDelegate.h"
 
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+
+
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+@synthesize rootNavigationController = _rootNavigationController;
+@synthesize slidingViewController = _slideViewController;
+@synthesize menuViewController = _menuViewController;
+@synthesize chatViewController = _chatViewController;
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // Configure logging framework
+	[DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    // create root navigation controller
+    _rootNavigationController = [[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
+    [_rootNavigationController setNavigationBarHidden:YES];
+    self.window.rootViewController = _rootNavigationController;
+    
+    // create menu view controller
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    _menuViewController = [storyboard instantiateViewControllerWithIdentifier:@"MenuView"];
+    
+    // create chat view controller
+    _chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChatView"];
+    
+    // create friends view controller
+    _friendsViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsView"];
+    
+    // create slide controller
+    _slideViewController = [[ECSlidingViewController alloc] init];
+    _slideViewController.topViewController = _chatViewController;
+    [_rootNavigationController pushViewController:_slideViewController animated:NO];
+    
+    
     return YES;
 }
 
@@ -45,5 +75,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end
