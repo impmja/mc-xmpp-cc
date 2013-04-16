@@ -1,3 +1,6 @@
 [submodule "XMPPFramework"]
 	path = XMPPFramework
 	url = https://github.com/robbiehanson/XMPPFramework.git
+[submodule "ECSlidingViewController"]
+	path = ECSlidingViewController
+	url = https://github.com/edgecase/ECSlidingViewController.git
