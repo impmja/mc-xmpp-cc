@@ -27,6 +27,7 @@
 @property (strong, nonatomic) ChatViewController            *chatViewController;
 @property (strong, nonatomic) FriendsViewController         *friendsViewController;
 
+@property (strong, nonatomic) XMPPConnection                *xmppConnection;
 
 
 @end
