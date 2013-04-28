@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17D1FC1017273E1300E4249C /* normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 17D1FC0F17273E1300E4249C /* normal.png */; };
-		17D1FC1217273E1600E4249C /* retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 17D1FC1117273E1600E4249C /* retina.png */; };
+		171019C6172D3ED800E6D99A /* normal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C4172D3ED800E6D99A /* normal2.png */; };
+		171019C7172D3ED800E6D99A /* retina2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C5172D3ED800E6D99A /* retina2.png */; };
 		3DAC3F0C171D98DA00A36A2B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0B171D98DA00A36A2B /* UIKit.framework */; };
 		3DAC3F0E171D98DA00A36A2B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0D171D98DA00A36A2B /* Foundation.framework */; };
 		3DAC3F10171D98DA00A36A2B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0F171D98DA00A36A2B /* CoreGraphics.framework */; };
@@ -140,8 +140,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		17D1FC0F17273E1300E4249C /* normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal.png; sourceTree = "<group>"; };
-		17D1FC1117273E1600E4249C /* retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retina.png; sourceTree = "<group>"; };
+		171019C4172D3ED800E6D99A /* normal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normal2.png; path = Resources/Images/normal2.png; sourceTree = "<group>"; };
+		171019C5172D3ED800E6D99A /* retina2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retina2.png; path = Resources/Images/retina2.png; sourceTree = "<group>"; };
 		3DAC3F08171D98DA00A36A2B /* test-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DAC3F0B171D98DA00A36A2B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DAC3F0D171D98DA00A36A2B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -423,8 +423,6 @@
 		3DAC3EFF171D98DA00A36A2B = {
 			isa = PBXGroup;
 			children = (
-				17D1FC1117273E1600E4249C /* retina.png */,
-				17D1FC0F17273E1300E4249C /* normal.png */,
 				3DAC3F11171D98DA00A36A2B /* MC-XMPP-CC */,
 				3DAC3F46171DA58900A36A2B /* XMPPFramework */,
 				3DAC43BA171DACA600A36A2B /* ECSlidingViewController */,
@@ -508,6 +506,8 @@
 		3DAC3F2C171D998A00A36A2B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				171019C4172D3ED800E6D99A /* normal2.png */,
+				171019C5172D3ED800E6D99A /* retina2.png */,
 				3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */,
 				3DAC3F31171D9B0500A36A2B /* Default.png */,
 				3DAC3F32171D9B0500A36A2B /* Default@2x.png */,
@@ -1212,8 +1212,8 @@
 				3DAC3F34171D9B0500A36A2B /* Default.png in Resources */,
 				3DAC3F35171D9B0500A36A2B /* Default@2x.png in Resources */,
 				3DAC43C4171DAE7E00A36A2B /* MainStoryboard.storyboard in Resources */,
-				17D1FC1017273E1300E4249C /* normal.png in Resources */,
-				17D1FC1217273E1600E4249C /* retina.png in Resources */,
+				171019C6172D3ED800E6D99A /* normal2.png in Resources */,
+				171019C7172D3ED800E6D99A /* retina2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
