@@ -21,13 +21,13 @@
 {
     [super viewDidLoad];
     
-    self.slidingViewController.anchorLeftRevealAmount = 280.0f;
+    self.slidingViewController.anchorLeftRevealAmount = 320.0f;
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.slidingViewController.anchorLeftRevealAmount = 280.0f;
+    self.slidingViewController.anchorLeftRevealAmount = 320.0f;
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
 }
 

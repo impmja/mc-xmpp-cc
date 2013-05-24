@@ -34,18 +34,20 @@
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-        self.slidingViewController.underLeftViewController = appDelegate.menuViewController;
+        self.slidingViewController.underLeftViewController = appDelegate.friendsViewController;
     }
     
+    /*
     if (![self.slidingViewController.underRightViewController isKindOfClass:[MenuViewController class]]) {
         self.slidingViewController.underRightViewController = appDelegate.friendsViewController;
     }
+    */
     
     [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     self.slidingViewController.anchorLeftPeekAmount = 40;
-    self.slidingViewController.anchorLeftRevealAmount = 280.0f;
+    self.slidingViewController.anchorLeftRevealAmount = 320.0f;
     self.slidingViewController.anchorRightPeekAmount = 40;
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
+    self.slidingViewController.anchorRightRevealAmount = 320.0f;
 }
 
 

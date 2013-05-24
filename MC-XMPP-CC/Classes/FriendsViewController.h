@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface FriendsViewController : UITableViewController
+
+@interface FriendsViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+    NSFetchedResultsController  *fetchedResultsController;
+}
+
 
 @end

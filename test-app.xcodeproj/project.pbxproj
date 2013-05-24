@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		171019C6172D3ED800E6D99A /* normal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C4172D3ED800E6D99A /* normal2.png */; };
 		171019C7172D3ED800E6D99A /* retina2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C5172D3ED800E6D99A /* retina2.png */; };
+		3DA01E5E174F70BB007A1C66 /* NSXMLElement+XEP_0203.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA01E5D174F70BB007A1C66 /* NSXMLElement+XEP_0203.m */; };
 		3DAC3F0C171D98DA00A36A2B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0B171D98DA00A36A2B /* UIKit.framework */; };
 		3DAC3F0E171D98DA00A36A2B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0D171D98DA00A36A2B /* Foundation.framework */; };
 		3DAC3F10171D98DA00A36A2B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0F171D98DA00A36A2B /* CoreGraphics.framework */; };
@@ -108,7 +109,6 @@
 		3DAC426B171DA58E00A36A2B /* XMPPPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC401C171DA58A00A36A2B /* XMPPPing.m */; };
 		3DAC426C171DA58E00A36A2B /* XMPPAutoTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC401F171DA58A00A36A2B /* XMPPAutoTime.m */; };
 		3DAC426D171DA58E00A36A2B /* XMPPTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC4021171DA58A00A36A2B /* XMPPTime.m */; };
-		3DAC426E171DA58E00A36A2B /* XMPPElement+Delay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC4024171DA58A00A36A2B /* XMPPElement+Delay.m */; };
 		3DAC426F171DA58E00A36A2B /* XMPPAttentionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC4027171DA58A00A36A2B /* XMPPAttentionModule.m */; };
 		3DAC4270171DA58E00A36A2B /* XMPPMessage+XEP_0224.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC4029171DA58A00A36A2B /* XMPPMessage+XEP_0224.m */; };
 		3DAC4272171DA58E00A36A2B /* DDList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC402E171DA58A00A36A2B /* DDList.m */; };
@@ -142,6 +142,8 @@
 /* Begin PBXFileReference section */
 		171019C4172D3ED800E6D99A /* normal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normal2.png; path = Resources/Images/normal2.png; sourceTree = "<group>"; };
 		171019C5172D3ED800E6D99A /* retina2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retina2.png; path = Resources/Images/retina2.png; sourceTree = "<group>"; };
+		3DA01E5C174F70BB007A1C66 /* NSXMLElement+XEP_0203.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLElement+XEP_0203.h"; sourceTree = "<group>"; };
+		3DA01E5D174F70BB007A1C66 /* NSXMLElement+XEP_0203.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLElement+XEP_0203.m"; sourceTree = "<group>"; };
 		3DAC3F08171D98DA00A36A2B /* test-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DAC3F0B171D98DA00A36A2B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DAC3F0D171D98DA00A36A2B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -335,8 +337,6 @@
 		3DAC401F171DA58A00A36A2B /* XMPPAutoTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPAutoTime.m; sourceTree = "<group>"; };
 		3DAC4020171DA58A00A36A2B /* XMPPTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPTime.h; sourceTree = "<group>"; };
 		3DAC4021171DA58A00A36A2B /* XMPPTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPTime.m; sourceTree = "<group>"; };
-		3DAC4023171DA58A00A36A2B /* XMPPElement+Delay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPElement+Delay.h"; sourceTree = "<group>"; };
-		3DAC4024171DA58A00A36A2B /* XMPPElement+Delay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPElement+Delay.m"; sourceTree = "<group>"; };
 		3DAC4026171DA58A00A36A2B /* XMPPAttentionModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPAttentionModule.h; sourceTree = "<group>"; };
 		3DAC4027171DA58A00A36A2B /* XMPPAttentionModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPAttentionModule.m; sourceTree = "<group>"; };
 		3DAC4028171DA58A00A36A2B /* XMPPMessage+XEP_0224.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPMessage+XEP_0224.h"; sourceTree = "<group>"; };
@@ -1007,8 +1007,8 @@
 		3DAC4022171DA58A00A36A2B /* XEP-0203 */ = {
 			isa = PBXGroup;
 			children = (
-				3DAC4023171DA58A00A36A2B /* XMPPElement+Delay.h */,
-				3DAC4024171DA58A00A36A2B /* XMPPElement+Delay.m */,
+				3DA01E5C174F70BB007A1C66 /* NSXMLElement+XEP_0203.h */,
+				3DA01E5D174F70BB007A1C66 /* NSXMLElement+XEP_0203.m */,
 			);
 			path = "XEP-0203";
 			sourceTree = "<group>";
@@ -1309,7 +1309,6 @@
 				3DAC426B171DA58E00A36A2B /* XMPPPing.m in Sources */,
 				3DAC426C171DA58E00A36A2B /* XMPPAutoTime.m in Sources */,
 				3DAC426D171DA58E00A36A2B /* XMPPTime.m in Sources */,
-				3DAC426E171DA58E00A36A2B /* XMPPElement+Delay.m in Sources */,
 				3DAC426F171DA58E00A36A2B /* XMPPAttentionModule.m in Sources */,
 				3DAC4270171DA58E00A36A2B /* XMPPMessage+XEP_0224.m in Sources */,
 				3DAC4272171DA58E00A36A2B /* DDList.m in Sources */,
@@ -1336,6 +1335,7 @@
 				3DAC43CD171DB5E700A36A2B /* ChatViewController.m in Sources */,
 				3DAC43D0171DC01300A36A2B /* FriendsViewController.m in Sources */,
 				3DAC43D4171DCAD500A36A2B /* XMPPConnection.m in Sources */,
+				3DA01E5E174F70BB007A1C66 /* NSXMLElement+XEP_0203.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

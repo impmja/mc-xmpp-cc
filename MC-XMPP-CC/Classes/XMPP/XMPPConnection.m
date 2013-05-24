@@ -68,11 +68,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     xmppReconnect = [[XMPPReconnect alloc] init];
     
     // Setup Roster support
-    xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
-    //xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
+    //xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
+    xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
 	
 	xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
-    //xmppRoster [[[XMPPRoster alloc] init];
+    //xmppRoster [[XMPPRoster alloc] init];
     xmppRoster.autoFetchRoster = YES;
 	xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
 	
@@ -80,14 +80,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
 	xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:xmppvCardStorage];
 	
+    // User Photos
 	xmppvCardAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:xmppvCardTempModule];
 	
 
     [xmppReconnect         activate:xmppStream];
-	//[xmppRoster            activate:xmppStream];
-	//[xmppvCardTempModule   activate:xmppStream];
-	//[xmppvCardAvatarModule activate:xmppStream];
-	//[xmppCapabilities      activate:xmppStream];
+	[xmppRoster            activate:xmppStream];
+	[xmppvCardTempModule   activate:xmppStream];
+	[xmppvCardAvatarModule activate:xmppStream];
+	[xmppCapabilities      activate:xmppStream];
     
     // register delegates
     [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -96,6 +97,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // setup host & port
     [xmppStream setHostName:host];
     [xmppStream setHostPort:port];
+    
+    //[xmppRoster fetchRoster];
 }
 
 - (void) destroyStream {
@@ -135,7 +138,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	password = _password;
     
 	NSError *error = nil;
-	if (![xmppStream connect:&error]) {
+	if (![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
         DDLogError(@"Error connecting: %@", error);
         
 		return NO;
@@ -250,6 +253,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 	if ([message isChatMessageWithBody])
 	{
+        XMPPJID * JID = [message from];
 		XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
 		                                                         xmppStream:xmppStream
 		                                               managedObjectContext:[self rosterManagedObjectContext]];

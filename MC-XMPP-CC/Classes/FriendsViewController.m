@@ -8,96 +8,145 @@
 
 #import "FriendsViewController.h"
 #import "ECSlidingViewController.h"
+#import "AppDelegate.h"
 
 
-@interface FriendsViewController ()
-
+@interface FriendsViewController () 
 @end
+
 
 @implementation FriendsViewController
 
+#pragma mark Accessors
+- (AppDelegate*)appDelegate {
+	return (AppDelegate*)[[UIApplication sharedApplication] delegate];
+}
 
-- (void)viewDidLoad
-{
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
+    self.slidingViewController.anchorRightRevealAmount = 320.0f;
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
+- (void)viewWillAppear:(BOOL)animated {
+    self.slidingViewController.anchorRightRevealAmount = 320.0f;
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
+}
+
+
+#pragma mark NSFetchedResultsController
+- (NSFetchedResultsController *)fetchedResultsController {
+	if (fetchedResultsController == nil) {
+		NSManagedObjectContext *moc = [[self appDelegate] xmppConnection].rosterManagedObjectContext;
+		
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject"
+		                                          inManagedObjectContext:moc];
+		
+		NSSortDescriptor *sd1 = [[NSSortDescriptor alloc] initWithKey:@"sectionNum" ascending:YES];
+		NSSortDescriptor *sd2 = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
+		
+		NSArray *sortDescriptors = [NSArray arrayWithObjects:sd1, sd2, nil];
+		
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		[fetchRequest setEntity:entity];
+		[fetchRequest setSortDescriptors:sortDescriptors];
+		[fetchRequest setFetchBatchSize:10];
+		
+		fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+		                                                               managedObjectContext:moc
+		                                                                 sectionNameKeyPath:@"sectionNum"
+		                                                                          cacheName:nil];
+		[fetchedResultsController setDelegate:self];
+		
+		NSError *error = nil;
+		if (![fetchedResultsController performFetch:&error]) {
+			//DDLogError(@"Error performing fetch: %@", error);
+		}
+	}
+	
+	return fetchedResultsController;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+	[[self tableView] reloadData];
+}
+
+
+#pragma mark UITableViewCell helpers
+- (void)configurePhotoForCell:(UITableViewCell *)cell user:(XMPPUserCoreDataStorageObject *)user {
+	// Our xmppRosterStorage will cache photos as they arrive from the xmppvCardAvatarModule.
+	// We only need to ask the avatar module for a photo, if the roster doesn't have it.
+	
+	if (user.photo != nil) {
+		cell.imageView.image = user.photo;
+	} else {
+		NSData *photoData = [[[[self appDelegate] xmppConnection] xmppvCardAvatarModule] photoDataForJID:user.jid];
+        
+		if (photoData != nil)
+			cell.imageView.image = [UIImage imageWithData:photoData];
+		else
+			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
+	}
 }
 
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[[self fetchedResultsController] sections] count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 1;
+- (NSString *)tableView:(UITableView *)sender titleForHeaderInSection:(NSInteger)sectionIndex {
+	NSArray *sections = [[self fetchedResultsController] sections];
+	
+	if (sectionIndex < [sections count]) {
+		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
+        
+		int section = [sectionInfo.name intValue];
+		switch (section) {
+			case 0  : return @"Available";
+			case 1  : return @"Away";
+			default : return @"Offline";
+		}
+	}
+	
+	return @"";
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    [cell.textLabel setText:@"Jan Schulte"];
-    
-    return cell;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
+	NSArray *sections = [[self fetchedResultsController] sections];
+	
+	if (sectionIndex < [sections count]) {
+		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
+		return sectionInfo.numberOfObjects;
+	}
+	
+	return 0;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	static NSString *CellIdentifier = @"Cell";
+	
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil)
+	{
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
+	}
+	
+	XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	
+	cell.textLabel.text = user.displayName;
+	[self configurePhotoForCell:cell user:user];
+	
+	return cell;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

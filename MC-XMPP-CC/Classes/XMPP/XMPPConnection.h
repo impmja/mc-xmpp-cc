@@ -11,7 +11,7 @@
 #import "XMPPFramework.h"
 
 
-@interface XMPPConnection : NSObject {
+@interface XMPPConnection : NSObject <XMPPRosterDelegate> {
     XMPPStream                          *xmppStream;
     XMPPReconnect                       *xmppReconnect;
     XMPPRoster                          *xmppRoster;
