@@ -49,6 +49,28 @@
     self.slidingViewController.anchorLeftRevealAmount = 320.0f;
     self.slidingViewController.anchorRightPeekAmount = 40;
     self.slidingViewController.anchorRightRevealAmount = 320.0f;
+    
+    
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+
+    self.view.keyboardTriggerOffset = self.toolBar.bounds.size.height;
+    
+    __weak ChatViewController * bSelf = self;
+    [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
+        CGRect toolBarFrame = bSelf.toolBar.frame;
+        toolBarFrame.origin.y = keyboardFrameInView.origin.y - toolBarFrame.size.height;
+        bSelf.toolBar.frame = toolBarFrame;
+        
+        CGRect tableViewFrame = bSelf.tableView.frame;
+        tableViewFrame.size.height = toolBarFrame.origin.y;
+        
+        bSelf.tableView.frame = tableViewFrame;
+        
+        [bSelf scrollToBottom];
+    }];
+    
+    [self scrollToBottom];
 }
 
 
@@ -103,6 +125,13 @@
 		else
 			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
 	}
+}
+
+-(void)scrollToBottom {
+    [self.tableView reloadData];
+    int lastRowNumber = [self.tableView numberOfRowsInSection:0] - 1;
+    NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+    [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 
@@ -160,5 +189,14 @@
     }
 }
 
+
+- (IBAction)onSendButtonClick:(id)sender {
+    [self.view hideKeyboard];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 
 @end

@@ -10,6 +10,10 @@
 
 #import "XMPPFramework.h"
 
+/*
+    TODO: - (void)configurePhotoForCell:(UITableViewCell *)cell user:(XMPPUserCoreDataStorageObject *)user {
+    nach hier verschieben und aus den Controller aufrufen
+*/
 
 @interface XMPPConnection : NSObject <XMPPRosterDelegate> {
     NSString                            *password;

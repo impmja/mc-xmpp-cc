@@ -13,11 +13,16 @@
 
 
 // Chat Messages in History speichern/laden: http://stackoverflow.com/questions/8568910/storing-messages-using-xmppframework-for-ios
-@interface ChatViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+
+@interface ChatViewController : UIViewController <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController  *fetchedResultsController;
 }
 
-@property (nonatomic, strong) NSString             *currentJID;
+@property (nonatomic, strong) NSString                  *currentJID;
 
+@property (weak, nonatomic) IBOutlet UITableView        *tableView;
+@property (weak, nonatomic) IBOutlet UIView             *toolBar;
+@property (weak, nonatomic) IBOutlet UIButton           *sendButton;
+@property (weak, nonatomic) IBOutlet UITextField        *textField;
 
 @end
