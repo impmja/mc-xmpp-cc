@@ -14,6 +14,23 @@
 
 * iOS 5
 * ARC
+* 
+
+## Presentation
+
+live demo mit freiwilligen
+
+xmpp , was ist das , wer benutzt das
+
+unser programm , was haben wir benutzt
+
+unser code wie haben wir xmpp benutzt schnitstellen bla
+
+unser code wie haben wir slidingmenu benutzt
+
+unser code wie haben wir tastatur
+
+interpreation von links (bildern vorladen beim scrollen etc)
 
 
 ## MIT License
