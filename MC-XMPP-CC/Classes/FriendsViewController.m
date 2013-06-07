@@ -137,7 +137,12 @@
 	
 	XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 	
-	cell.textLabel.text = user.displayName;
+    if (user.nickname != nil && [user.nickname length] > 0) {
+        cell.textLabel.text = user.nickname;
+    } else {
+        cell.textLabel.text = user.displayName;
+    }
+    
 	[self configurePhotoForCell:cell user:user];
 	
 	return cell;

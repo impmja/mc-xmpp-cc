@@ -14,6 +14,8 @@
 
 // Chat Messages in History speichern/laden: http://stackoverflow.com/questions/8568910/storing-messages-using-xmppframework-for-ios
 
+// Messages parsen: http://stackoverflow.com/questions/14628078/going-through-text-parsing-links
+
 @interface ChatViewController : UIViewController <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController  *fetchedResultsController;
 }
