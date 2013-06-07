@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		171019C6172D3ED800E6D99A /* normal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C4172D3ED800E6D99A /* normal2.png */; };
 		171019C7172D3ED800E6D99A /* retina2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C5172D3ED800E6D99A /* retina2.png */; };
+		3D6790861762098A0061B88D /* DAKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6790851762098A0061B88D /* DAKeyboardControl.m */; };
 		3DA01E5E174F70BB007A1C66 /* NSXMLElement+XEP_0203.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA01E5D174F70BB007A1C66 /* NSXMLElement+XEP_0203.m */; };
 		3DAC3F0C171D98DA00A36A2B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0B171D98DA00A36A2B /* UIKit.framework */; };
 		3DAC3F0E171D98DA00A36A2B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0D171D98DA00A36A2B /* Foundation.framework */; };
@@ -142,6 +143,8 @@
 /* Begin PBXFileReference section */
 		171019C4172D3ED800E6D99A /* normal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normal2.png; path = Resources/Images/normal2.png; sourceTree = "<group>"; };
 		171019C5172D3ED800E6D99A /* retina2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retina2.png; path = Resources/Images/retina2.png; sourceTree = "<group>"; };
+		3D6790841762098A0061B88D /* DAKeyboardControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAKeyboardControl.h; sourceTree = "<group>"; };
+		3D6790851762098A0061B88D /* DAKeyboardControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAKeyboardControl.m; sourceTree = "<group>"; };
 		3DA01E5C174F70BB007A1C66 /* NSXMLElement+XEP_0203.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLElement+XEP_0203.h"; sourceTree = "<group>"; };
 		3DA01E5D174F70BB007A1C66 /* NSXMLElement+XEP_0203.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLElement+XEP_0203.m"; sourceTree = "<group>"; };
 		3DAC3F08171D98DA00A36A2B /* test-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -420,10 +423,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D6790831762098A0061B88D /* DAKeyboardControl */ = {
+			isa = PBXGroup;
+			children = (
+				3D6790841762098A0061B88D /* DAKeyboardControl.h */,
+				3D6790851762098A0061B88D /* DAKeyboardControl.m */,
+			);
+			name = DAKeyboardControl;
+			path = DAKeyboardControl/DAKeyboardControl;
+			sourceTree = SOURCE_ROOT;
+		};
 		3DAC3EFF171D98DA00A36A2B = {
 			isa = PBXGroup;
 			children = (
 				3DAC3F11171D98DA00A36A2B /* MC-XMPP-CC */,
+				3D6790831762098A0061B88D /* DAKeyboardControl */,
 				3DAC3F46171DA58900A36A2B /* XMPPFramework */,
 				3DAC43BA171DACA600A36A2B /* ECSlidingViewController */,
 				3DAC3F0A171D98DA00A36A2B /* Frameworks */,
@@ -1336,6 +1350,7 @@
 				3DAC43D0171DC01300A36A2B /* FriendsViewController.m in Sources */,
 				3DAC43D4171DCAD500A36A2B /* XMPPConnection.m in Sources */,
 				3DA01E5E174F70BB007A1C66 /* NSXMLElement+XEP_0203.m in Sources */,
+				3D6790861762098A0061B88D /* DAKeyboardControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,11 +31,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 
 @implementation XMPPConnection : NSObject {
-    
-    
 }
 
-@synthesize xmppStream, xmppReconnect, xmppRoster, xmppRosterStorage, xmppvCardTempModule, xmppvCardAvatarModule, xmppCapabilities, xmppCapabilitiesStorage;
+@synthesize xmppStream, xmppReconnect, xmppRoster, xmppRosterStorage, xmppvCardTempModule, xmppvCardAvatarModule, xmppCapabilities;
+@synthesize xmppCapabilitiesStorage, xmppvCardStorage, xmppMessageArchivingStorage, xmppMessageArchiving;
+
 @synthesize password, isConnected;
 
 
@@ -80,19 +80,29 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
 	xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:xmppvCardStorage];
 	
-    // User Photos
+    // Setup User Photos
 	xmppvCardAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:xmppvCardTempModule];
 	
+    // Setup Message Archive
+    xmppMessageArchivingStorage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
+    xmppMessageArchiving = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:xmppMessageArchivingStorage];
+    // Store messages on client side only
+    [xmppMessageArchiving setClientSideMessageArchivingOnly:YES];
+
 
     [xmppReconnect         activate:xmppStream];
 	[xmppRoster            activate:xmppStream];
 	[xmppvCardTempModule   activate:xmppStream];
 	[xmppvCardAvatarModule activate:xmppStream];
 	[xmppCapabilities      activate:xmppStream];
+    [xmppMessageArchiving  activate:xmppStream];
+    
     
     // register delegates
     [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [xmppMessageArchiving addDelegate:self delegateQueue:dispatch_get_main_queue()];
+
     
     // setup host & port
     [xmppStream setHostName:host];
@@ -253,25 +263,25 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 	if ([message isChatMessageWithBody])
 	{
-        XMPPJID * JID = [message from];
-		XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
+        XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
 		                                                         xmppStream:xmppStream
 		                                               managedObjectContext:[self rosterManagedObjectContext]];
 		
 		NSString *body = [[message elementForName:@"body"] stringValue];
 		NSString *displayName = [user displayName];
         
-		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
-		{
+		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+            NSLog(@"Message: %@", body);
+
+            /*
 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
                                                                 message:body
                                                                delegate:nil
                                                       cancelButtonTitle:@"Ok"
                                                       otherButtonTitles:nil];
 			[alertView show];
-		}
-		else
-		{
+            */
+		} else {
 			// We are not active, so use a local notification instead
 			UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 			localNotification.alertAction = @"Ok";
@@ -313,27 +323,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	NSString *jidStrBare = [presence fromStr];
 	NSString *body = nil;
 	
-	if (![displayName isEqualToString:jidStrBare])
-	{
+	if (![displayName isEqualToString:jidStrBare]) {
 		body = [NSString stringWithFormat:@"Buddy request from %@ <%@>", displayName, jidStrBare];
 	}
-	else
-	{
+	else {
 		body = [NSString stringWithFormat:@"Buddy request from %@", displayName];
 	}
 	
 	
-	if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
-	{
+	if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+    
+        NSLog(@"Message: %@", body);
+        /*
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
 		                                                    message:body
 		                                                   delegate:nil
 		                                          cancelButtonTitle:@"Not implemented"
 		                                          otherButtonTitles:nil];
 		[alertView show];
-	}
-	else
-	{
+        */
+	} else {
 		// We are not active, so use a local notification instead
 		UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 		localNotification.alertAction = @"Not implemented";
@@ -352,6 +361,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (NSManagedObjectContext *)capabilitiesManagedObjectContext {
 	return [xmppCapabilitiesStorage mainThreadManagedObjectContext];
+}
+
+- (NSManagedObjectContext *)messageArchivingManagedObjectContext {
+	return [xmppMessageArchivingStorage mainThreadManagedObjectContext];
 }
 
 

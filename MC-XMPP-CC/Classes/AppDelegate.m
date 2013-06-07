@@ -45,6 +45,7 @@
     _slideViewController.topViewController = _chatViewController;
     [_rootNavigationController pushViewController:_slideViewController animated:NO];
     
+    [_rootNavigationController.view addGestureRecognizer:_slideViewController.panGesture];
     
     // TEST
     self.xmppConnection = [[XMPPConnection alloc] initWithHost:@"katzensaft.burstdamage.de" andPort:5222];

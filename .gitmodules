@@ -4,3 +4,6 @@
 [submodule "ECSlidingViewController"]
 	path = ECSlidingViewController
 	url = https://github.com/edgecase/ECSlidingViewController.git
+[submodule "DAKeyboardControl"]
+	path = DAKeyboardControl
+	url = https://github.com/danielamitay/DAKeyboardControl

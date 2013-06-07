@@ -19,8 +19,9 @@
 @implementation ChatViewController
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+#pragma mark Accessors
+- (AppDelegate*)appDelegate {
+	return (AppDelegate*)[[UIApplication sharedApplication] delegate];
 }
 
 
@@ -43,7 +44,7 @@
     }
     */
     
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    //[self.view addGestureRecognizer:self.slidingViewController.panGesture];
     self.slidingViewController.anchorLeftPeekAmount = 40;
     self.slidingViewController.anchorLeftRevealAmount = 320.0f;
     self.slidingViewController.anchorRightPeekAmount = 40;
@@ -52,74 +53,112 @@
 
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
+	NSArray *sections = [[self fetchedResultsController] sections];
+	
+	if (sectionIndex < [sections count]) {
+		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
+		return sectionInfo.numberOfObjects;
+	}
+	
+	return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    [cell.textLabel setText:@"BLAH..."];
+	
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
+	}
+	
+	XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	
+    if (msg.body != nil) {
+        cell.textLabel.text = msg.body;
+    } else {
+        cell.textLabel.text = @"<Ist am tippen ...>";
+    }
+	
+	[self configurePhotoForCell:cell withJID:msg.bareJid];
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+#pragma mark UITableViewCell helpers
+- (void)configurePhotoForCell:(UITableViewCell *)cell withJID:(XMPPJID *)jid {
+	if (jid == nil) {
+		cell.imageView.image = nil; // TODO: Default?
+	} else {
+		NSData *photoData = [[[[self appDelegate] xmppConnection] xmppvCardAvatarModule] photoDataForJID:jid];
+        
+		if (photoData != nil)
+			cell.imageView.image = [UIImage imageWithData:photoData];
+		else
+			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
+	}
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+
+#pragma mark NSFetchedResultsController
+- (NSFetchedResultsController *)fetchedResultsController {
+	if (fetchedResultsController == nil) {
+		NSManagedObjectContext *moc = [[self appDelegate] xmppConnection].messageArchivingManagedObjectContext;
+		
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
+		                                          inManagedObjectContext:moc];
+		
+		NSSortDescriptor *sd1 = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
+		
+		NSArray *sortDescriptors = [NSArray arrayWithObjects:sd1, nil];
+		
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		[fetchRequest setEntity:entity];
+		[fetchRequest setSortDescriptors:sortDescriptors];
+		//[fetchRequest setFetchBatchSize:10];
+		
+		fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+		                                                               managedObjectContext:moc
+		                                                                 sectionNameKeyPath:nil
+		                                                                          cacheName:nil];
+		[fetchedResultsController setDelegate:self];
+		
+		NSError *error = nil;
+		if (![fetchedResultsController performFetch:&error]) {
+			//DDLogError(@"Error performing fetch: %@", error);
+		}
+	}
+	
+	return fetchedResultsController;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+	[[self tableView] reloadData];
+    
+    //[self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
 }
-*/
 
-#pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+#pragma mark Setter
+-(void)setCurrentJID:(NSString *)jid {
+
+    _currentJID = jid;
+
+    [fetchedResultsController.fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"bareJidStr == %@", _currentJID]];
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error]) {
+        //DDLogError(@"Error performing fetch: %@", error);
+    } else {
+        [self controllerDidChangeContent:fetchedResultsController];
+    }
 }
+
 
 @end

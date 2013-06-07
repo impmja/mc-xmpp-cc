@@ -12,28 +12,21 @@
 
 
 @interface XMPPConnection : NSObject <XMPPRosterDelegate> {
-    XMPPStream                          *xmppStream;
-    XMPPReconnect                       *xmppReconnect;
-    XMPPRoster                          *xmppRoster;
-	XMPPRosterCoreDataStorage           *xmppRosterStorage;
-    XMPPvCardCoreDataStorage            *xmppvCardStorage;
-	XMPPvCardTempModule                 *xmppvCardTempModule;
-	XMPPvCardAvatarModule               *xmppvCardAvatarModule;
-	XMPPCapabilities                    *xmppCapabilities;
-	XMPPCapabilitiesCoreDataStorage     *xmppCapabilitiesStorage;
-    
     NSString                            *password;
     BOOL                                isConnected;
 }
 
-@property (nonatomic, strong, readonly) XMPPStream                          *xmppStream;
-@property (nonatomic, strong, readonly) XMPPReconnect                       *xmppReconnect;
-@property (nonatomic, strong, readonly) XMPPRoster                          *xmppRoster;
-@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage           *xmppRosterStorage;
-@property (nonatomic, strong, readonly) XMPPvCardTempModule                 *xmppvCardTempModule;
-@property (nonatomic, strong, readonly) XMPPvCardAvatarModule               *xmppvCardAvatarModule;
-@property (nonatomic, strong, readonly) XMPPCapabilities                    *xmppCapabilities;
-@property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage     *xmppCapabilitiesStorage;
+@property (nonatomic, strong, readonly) XMPPStream                              *xmppStream;
+@property (nonatomic, strong, readonly) XMPPReconnect                           *xmppReconnect;
+@property (nonatomic, strong, readonly) XMPPRoster                              *xmppRoster;
+@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage               *xmppRosterStorage;
+@property (nonatomic, strong, readonly) XMPPvCardTempModule                     *xmppvCardTempModule;
+@property (nonatomic, strong, readonly) XMPPvCardAvatarModule                   *xmppvCardAvatarModule;
+@property (nonatomic, strong, readonly) XMPPvCardCoreDataStorage                *xmppvCardStorage;
+@property (nonatomic, strong, readonly) XMPPCapabilities                        *xmppCapabilities;
+@property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage         *xmppCapabilitiesStorage;
+@property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage     *xmppMessageArchivingStorage;
+@property (nonatomic, strong, readonly) XMPPMessageArchiving                    *xmppMessageArchiving;
 
 
 @property (nonatomic, strong, readonly) NSString        *password;
@@ -51,5 +44,6 @@
 #pragma mark - CoreData
 - (NSManagedObjectContext *)rosterManagedObjectContext;
 - (NSManagedObjectContext *)capabilitiesManagedObjectContext;
+- (NSManagedObjectContext *)messageArchivingManagedObjectContext;
 
 @end
