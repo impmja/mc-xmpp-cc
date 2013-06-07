@@ -151,7 +151,11 @@
     // get the selected user & set it as a filter for the chat
     XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 	
-    [[self appDelegate].chatViewController setCurrentJID:user.jidStr];
+    [[self appDelegate].chatViewController setCurrentJID:[user.jid full]];
+    
+    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+        [self.slidingViewController resetTopView];
+    }];
 }
 
 @end

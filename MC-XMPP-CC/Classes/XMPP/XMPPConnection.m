@@ -75,7 +75,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     //xmppRoster [[XMPPRoster alloc] init];
     xmppRoster.autoFetchRoster = YES;
 	xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
-	
+	//[xmppRoster fetchRoster];
+    
 	// Setup vCard support
 	xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
 	xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:xmppvCardStorage];
@@ -354,7 +355,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 
-#pragma mark Core Data
+#pragma mark - Core Data
 - (NSManagedObjectContext *)rosterManagedObjectContext {
 	return [xmppRosterStorage mainThreadManagedObjectContext];
 }
@@ -367,5 +368,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	return [xmppMessageArchivingStorage mainThreadManagedObjectContext];
 }
 
+
+#pragma mark - Helper
+- (void)sendMessage:(NSString *)messageStr toJID:(NSString*)jid {
+
+    if([messageStr length] > 0) {
+        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+        [body setStringValue:messageStr];
+
+        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+        [message addAttributeWithName:@"type" stringValue:@"chat"];
+        [message addAttributeWithName:@"to" stringValue:jid];
+        [message addChild:body];
+
+        [xmppStream sendElement:message];
+    }
+}
 
 @end

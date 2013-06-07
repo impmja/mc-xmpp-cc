@@ -170,7 +170,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
 	[[self tableView] reloadData];
     
-    //[self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+    [self scrollToBottom];
 }
 
 
@@ -191,12 +191,27 @@
 
 
 - (IBAction)onSendButtonClick:(id)sender {
-    [self.view hideKeyboard];
+    if (self.textField.text.length > 0) {
+        [self.view hideKeyboard];
+    
+        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:self.currentJID];
+        
+        self.textField.text = @"";
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
+    if (self.textField.text.length > 0) {
+        [self.view hideKeyboard];
+    
+        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:self.currentJID];
+        
+        self.textField.text = @"";
+        
+        [self.textField resignFirstResponder];
+        return YES;
+    }
+    return NO;
 }
 
 @end

@@ -50,4 +50,7 @@
 - (NSManagedObjectContext *)capabilitiesManagedObjectContext;
 - (NSManagedObjectContext *)messageArchivingManagedObjectContext;
 
+#pragma mark - Helper
+- (void)sendMessage:(NSString *)messageStr toJID:(NSString*)jid;
+
 @end
