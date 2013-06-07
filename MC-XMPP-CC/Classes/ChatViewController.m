@@ -129,9 +129,12 @@
 
 -(void)scrollToBottom {
     [self.tableView reloadData];
-    int lastRowNumber = [self.tableView numberOfRowsInSection:0] - 1;
-    NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
-    [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
+    if (self.fetchedResultsController.fetchedObjects != nil && [self.fetchedResultsController.fetchedObjects count] > 0) {
+        int lastRowNumber = [self.tableView numberOfRowsInSection:0] - 1;
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+        [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
 }
 
 
@@ -168,8 +171,6 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-	[[self tableView] reloadData];
-    
     [self scrollToBottom];
 }
 
