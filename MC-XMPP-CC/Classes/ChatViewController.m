@@ -90,6 +90,26 @@
 	return 0;
 }
 
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//
+//       return tableView.sectionHeaderHeight = 84.0;
+//
+//}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+
+    NSString *cellText = msg.body;
+    UIFont *cellFont = [UIFont fontWithName:@"Helvetica" size:21.0];
+    CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
+    CGSize labelSize = [cellText sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+    
+    return labelSize.height + 20;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
 	
@@ -102,7 +122,12 @@
 	XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 	
     if (msg.body != nil) {
+        cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = msg.body;
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+
+
+        
     } else {
         cell.textLabel.text = @"<Ist am tippen ...>";
     }
@@ -119,11 +144,16 @@
 		cell.imageView.image = nil; // TODO: Default?
 	} else {
 		NSData *photoData = [[[[self appDelegate] xmppConnection] xmppvCardAvatarModule] photoDataForJID:jid];
-        
-		if (photoData != nil)
+    
+		if (photoData != nil) {
+            
 			cell.imageView.image = [UIImage imageWithData:photoData];
-		else
+            
+        } else {
+            
 			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
+            
+        }
 	}
 }
 
