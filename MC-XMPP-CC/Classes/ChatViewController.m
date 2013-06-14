@@ -45,7 +45,6 @@
     }
     */
     
-    //[self.view addGestureRecognizer:self.slidingViewController.panGesture];
     self.slidingViewController.anchorLeftPeekAmount = 40;
     self.slidingViewController.anchorLeftRevealAmount = 320.0f;
     self.slidingViewController.anchorRightPeekAmount = 40;
@@ -71,7 +70,12 @@
         [bSelf scrollToBottom];
     }];
     
-    [self scrollToBottom];
+    if (_currentJID != nil) {
+        [self showChatTableView:YES];
+        [self scrollToBottom];
+    } else {
+        [self showChatTableView:NO];
+    }
 }
 
 
@@ -100,16 +104,8 @@
 {
     XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     NSString *cellText = msg.body;
-/*
-    
-    UIFont *cellFont = [UIFont fontWithName:@"Helvetica" size:21.0];
-    CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
-    CGSize labelSize = [cellText sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
 
-    return labelSize.height + 20;
-*/    
-    
-     CGSize stringSize = [cellText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(kTimelineTextFieldWidth, kMaxTimelineTextFieldHeight) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize stringSize = [cellText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(kTimelineTextFieldWidth, kMaxTimelineTextFieldHeight) lineBreakMode:NSLineBreakByWordWrapping];
             
     return stringSize.height + 40;
 }
@@ -117,14 +113,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ChatCell";
 	
-    /*
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
-	}
-	*/
-    
     ChatTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         
@@ -143,14 +131,16 @@
     cell.chatText.numberOfLines = 0;
     if (msg.body != nil) {
         cell.chatText.numberOfLines = 0;
+        //cell.chatText.text = [NSString stringWithFormat:@"JIB: %@ - Text:%@", msg.bareJidStr, msg.body];
         cell.chatText.text = msg.body;
         cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];        
     } else {
-        cell.chatText.text = @"<Ist am tippen ...>";
+        cell.chatText.text = @"<Ist am tippen ...>"; // TODO: Localize
     }
 	
-	[self configurePhotoForCell:cell withJID:msg.bareJid];
-    
+    if (!msg.isOutgoing) {
+        [self configurePhotoForCell:cell withJID:msg.bareJid];
+    }
     return cell;
 }
 
@@ -159,13 +149,13 @@
 - (void)configurePhotoForCell:(ChatTableViewCell *)cell withJID:(XMPPJID *)jid {
     [cell.avatarImage setClipsToBounds:YES];
 	if (jid == nil) {
-		cell.avatarImage.image = [UIImage imageNamed:@"defaultPerson"];
+		cell.avatarImage.image = [UIImage imageNamed:@"defaultAvatarImage"];
 	} else {
 		NSData *photoData = [[[[self appDelegate] xmppConnection] xmppvCardAvatarModule] photoDataForJID:jid];
 		if (photoData != nil) {
 			cell.avatarImage.image = [UIImage imageWithData:photoData];
         } else {
-			cell.avatarImage.image = [UIImage imageNamed:@"defaultPerson"];
+			cell.avatarImage.image = [UIImage imageNamed:@"defaultAvatarImage"];
         }
 	}
 }
@@ -231,6 +221,12 @@
     } else {
         [self controllerDidChangeContent:fetchedResultsController];
     }
+    
+    if (_currentJID != nil) {
+       [self showChatTableView:YES];
+    } else {
+       [self showChatTableView:YES];
+    }
 }
 
 
@@ -257,5 +253,13 @@
     }
     return NO;
 }
+
+
+-(void)showChatTableView:(BOOL)show {
+    [self.noConversationView setHidden:show];
+    [self.tableView setHidden:!show];
+    [self.toolBar setHidden:!show];
+}
+
 
 @end

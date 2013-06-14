@@ -26,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIView             *toolBar;
 @property (weak, nonatomic) IBOutlet UIButton           *sendButton;
 @property (weak, nonatomic) IBOutlet UITextField        *textField;
+@property (weak, nonatomic) IBOutlet UIView *noConversationView;
 
 @end

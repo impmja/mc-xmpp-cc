@@ -14,6 +14,8 @@
 @interface FriendsViewController () 
 @end
 
+#define kOptionsSection 
+
 
 @implementation FriendsViewController
 
@@ -26,12 +28,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.slidingViewController.anchorRightRevealAmount = 320.0f;
+    self.slidingViewController.anchorRightRevealAmount = 280.0f;
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
+    
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.slidingViewController.anchorRightRevealAmount = 320.0f;
+    self.slidingViewController.anchorRightRevealAmount = 280.0f;
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
 }
 
@@ -94,7 +98,7 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[[self fetchedResultsController] sections] count];
+    return [[[self fetchedResultsController] sections] count] + 1; // +1 for Options
 }
 
 - (NSString *)tableView:(UITableView *)sender titleForHeaderInSection:(NSInteger)sectionIndex {
@@ -109,9 +113,9 @@
 			case 1  : return @"Away";
 			default : return @"Offline";
 		}
-	}
-	
-	return @"";
+	} else {
+        return @"Options";
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
@@ -120,9 +124,9 @@
 	if (sectionIndex < [sections count]) {
 		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
 		return sectionInfo.numberOfObjects;
-	}
-	
-	return 0;
+	} else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,16 +139,23 @@
                                       reuseIdentifier:CellIdentifier];
 	}
 	
-	XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-	
-    if (user.nickname != nil && [user.nickname length] > 0) {
-        cell.textLabel.text = user.nickname;
-    } else {
-        cell.textLabel.text = user.displayName;
+    //NSLog(@"Sections: %d - Section: %d", [[self fetchedResultsController] sections].count, indexPath.section);
+    
+    if (indexPath.section < [[self fetchedResultsController] sections].count) {
+        XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        if (user.nickname != nil && [user.nickname length] > 0) {
+            cell.textLabel.text = user.nickname;
+        } else {
+            cell.textLabel.text = user.displayName;
+        }
+        
+        [self configurePhotoForCell:cell user:user];
+	} else {
+        cell.textLabel.text = @"Login";
+        cell.imageView.image = [UIImage imageNamed:@"bitch_please.png"];
     }
     
-	[self configurePhotoForCell:cell user:user];
-	
 	return cell;
 }
 

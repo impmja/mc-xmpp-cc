@@ -141,6 +141,7 @@
 		3DB26AF5176B303100A8D833 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB26AF4176B303100A8D833 /* ChatTableViewCell.xib */; };
 		3DB26AF8176B32E900A8D833 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB26AF7176B32E900A8D833 /* ChatTableViewCell.m */; };
 		3DB26AFA176B3A2A00A8D833 /* defaultAvatarImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */; };
+		3DB26AFC176B515B00A8D833 /* bitch_please.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB26AFB176B515B00A8D833 /* bitch_please.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -406,6 +407,7 @@
 		3DB26AF6176B32E900A8D833 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCell.h; path = Classes/ChatTableViewCell.h; sourceTree = "<group>"; };
 		3DB26AF7176B32E900A8D833 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCell.m; path = Classes/ChatTableViewCell.m; sourceTree = "<group>"; };
 		3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultAvatarImage.png; path = Resources/Images/defaultAvatarImage.png; sourceTree = "<group>"; };
+		3DB26AFB176B515B00A8D833 /* bitch_please.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bitch_please.png; path = Resources/Images/bitch_please.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,12 +532,13 @@
 		3DAC3F2C171D998A00A36A2B /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */,
-				171019C4172D3ED800E6D99A /* normal2.png */,
-				171019C5172D3ED800E6D99A /* retina2.png */,
+				3DB26AFB176B515B00A8D833 /* bitch_please.png */,
 				3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */,
 				3DAC3F31171D9B0500A36A2B /* Default.png */,
 				3DAC3F32171D9B0500A36A2B /* Default@2x.png */,
+				3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */,
+				171019C4172D3ED800E6D99A /* normal2.png */,
+				171019C5172D3ED800E6D99A /* retina2.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1241,6 +1244,7 @@
 				171019C7172D3ED800E6D99A /* retina2.png in Resources */,
 				3DB26AF5176B303100A8D833 /* ChatTableViewCell.xib in Resources */,
 				3DB26AFA176B3A2A00A8D833 /* defaultAvatarImage.png in Resources */,
+				3DB26AFC176B515B00A8D833 /* bitch_please.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
