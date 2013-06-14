@@ -107,7 +107,7 @@
 
     CGSize stringSize = [cellText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(kTimelineTextFieldWidth, kMaxTimelineTextFieldHeight) lineBreakMode:NSLineBreakByWordWrapping];
             
-    return stringSize.height + 40;
+    return stringSize.height + 62;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -133,7 +133,9 @@
         cell.chatText.numberOfLines = 0;
         //cell.chatText.text = [NSString stringWithFormat:@"JIB: %@ - Text:%@", msg.bareJidStr, msg.body];
         cell.chatText.text = msg.body;
-        cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];        
+        cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+
+        
     } else {
         cell.chatText.text = @"<Ist am tippen ...>"; // TODO: Localize
     }
