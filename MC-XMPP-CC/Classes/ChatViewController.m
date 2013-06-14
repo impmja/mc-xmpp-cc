@@ -10,6 +10,7 @@
 #import "ECSlidingViewController.h"
 
 #import "AppDelegate.h"
+#import "ChatTableViewCell.h"
 
 
 @interface ChatViewController ()
@@ -90,46 +91,62 @@
 	return 0;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//
-//       return tableView.sectionHeaderHeight = 84.0;
-//
-//}
 
+
+#define kTimelineTextFieldWidth 250.0f
+#define kMaxTimelineTextFieldHeight 400.0f
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-
     NSString *cellText = msg.body;
+/*
+    
     UIFont *cellFont = [UIFont fontWithName:@"Helvetica" size:21.0];
     CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
     CGSize labelSize = [cellText sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
-    
+
     return labelSize.height + 20;
+*/    
+    
+     CGSize stringSize = [cellText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(kTimelineTextFieldWidth, kMaxTimelineTextFieldHeight) lineBreakMode:NSLineBreakByWordWrapping];
+            
+    return stringSize.height + 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"ChatCell";
 	
+    /*
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
 	}
-	
-	XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-	
-    if (msg.body != nil) {
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.text = msg.body;
-        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
-
-
+	*/
+    
+    ChatTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
         
+        NSArray * nib = [[NSBundle mainBundle] loadNibNamed:@"ChatTableViewCell" owner:nil options:nil];
+        
+        for (id object in nib) {
+            if ([object isKindOfClass:[ChatTableViewCell class]]) {
+                cell = (ChatTableViewCell *)object;
+                break;
+            }
+        }
+    }
+
+	XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	cell.chatText.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.chatText.numberOfLines = 0;
+    if (msg.body != nil) {
+        cell.chatText.numberOfLines = 0;
+        cell.chatText.text = msg.body;
+        cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];        
     } else {
-        cell.textLabel.text = @"<Ist am tippen ...>";
+        cell.chatText.text = @"<Ist am tippen ...>";
     }
 	
 	[self configurePhotoForCell:cell withJID:msg.bareJid];
@@ -139,20 +156,16 @@
 
 
 #pragma mark UITableViewCell helpers
-- (void)configurePhotoForCell:(UITableViewCell *)cell withJID:(XMPPJID *)jid {
+- (void)configurePhotoForCell:(ChatTableViewCell *)cell withJID:(XMPPJID *)jid {
+    [cell.avatarImage setClipsToBounds:YES];
 	if (jid == nil) {
-		cell.imageView.image = nil; // TODO: Default?
+		cell.avatarImage.image = [UIImage imageNamed:@"defaultPerson"];
 	} else {
 		NSData *photoData = [[[[self appDelegate] xmppConnection] xmppvCardAvatarModule] photoDataForJID:jid];
-    
 		if (photoData != nil) {
-            
-			cell.imageView.image = [UIImage imageWithData:photoData];
-            
+			cell.avatarImage.image = [UIImage imageWithData:photoData];
         } else {
-            
-			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
-            
+			cell.avatarImage.image = [UIImage imageNamed:@"defaultPerson"];
         }
 	}
 }

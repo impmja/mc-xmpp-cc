@@ -138,6 +138,9 @@
 		3DAC43CD171DB5E700A36A2B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43CC171DB5E700A36A2B /* ChatViewController.m */; };
 		3DAC43D0171DC01300A36A2B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43CF171DC01300A36A2B /* FriendsViewController.m */; };
 		3DAC43D4171DCAD500A36A2B /* XMPPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43D3171DCAD500A36A2B /* XMPPConnection.m */; };
+		3DB26AF5176B303100A8D833 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB26AF4176B303100A8D833 /* ChatTableViewCell.xib */; };
+		3DB26AF8176B32E900A8D833 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB26AF7176B32E900A8D833 /* ChatTableViewCell.m */; };
+		3DB26AFA176B3A2A00A8D833 /* defaultAvatarImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -399,6 +402,10 @@
 		3DAC43CF171DC01300A36A2B /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendsViewController.m; path = Classes/FriendsViewController.m; sourceTree = "<group>"; };
 		3DAC43D2171DCAD500A36A2B /* XMPPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPConnection.h; path = Classes/XMPP/XMPPConnection.h; sourceTree = "<group>"; };
 		3DAC43D3171DCAD500A36A2B /* XMPPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPConnection.m; path = Classes/XMPP/XMPPConnection.m; sourceTree = "<group>"; };
+		3DB26AF4176B303100A8D833 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatTableViewCell.xib; path = Resources/ChatTableViewCell.xib; sourceTree = "<group>"; };
+		3DB26AF6176B32E900A8D833 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCell.h; path = Classes/ChatTableViewCell.h; sourceTree = "<group>"; };
+		3DB26AF7176B32E900A8D833 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCell.m; path = Classes/ChatTableViewCell.m; sourceTree = "<group>"; };
+		3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultAvatarImage.png; path = Resources/Images/defaultAvatarImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -489,6 +496,7 @@
 				3DAC3F13171D98DA00A36A2B /* test-app-Info.plist */,
 				3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */,
 				3DAC3F19171D98DA00A36A2B /* test-app-Prefix.pch */,
+				3DB26AF4176B303100A8D833 /* ChatTableViewCell.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -505,6 +513,8 @@
 				3DAC43CC171DB5E700A36A2B /* ChatViewController.m */,
 				3DAC43CE171DC01200A36A2B /* FriendsViewController.h */,
 				3DAC43CF171DC01300A36A2B /* FriendsViewController.m */,
+				3DB26AF6176B32E900A8D833 /* ChatTableViewCell.h */,
+				3DB26AF7176B32E900A8D833 /* ChatTableViewCell.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -520,6 +530,7 @@
 		3DAC3F2C171D998A00A36A2B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */,
 				171019C4172D3ED800E6D99A /* normal2.png */,
 				171019C5172D3ED800E6D99A /* retina2.png */,
 				3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */,
@@ -1228,6 +1239,8 @@
 				3DAC43C4171DAE7E00A36A2B /* MainStoryboard.storyboard in Resources */,
 				171019C6172D3ED800E6D99A /* normal2.png in Resources */,
 				171019C7172D3ED800E6D99A /* retina2.png in Resources */,
+				3DB26AF5176B303100A8D833 /* ChatTableViewCell.xib in Resources */,
+				3DB26AFA176B3A2A00A8D833 /* defaultAvatarImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1351,6 +1364,7 @@
 				3DAC43D4171DCAD500A36A2B /* XMPPConnection.m in Sources */,
 				3DA01E5E174F70BB007A1C66 /* NSXMLElement+XEP_0203.m in Sources */,
 				3D6790861762098A0061B88D /* DAKeyboardControl.m in Sources */,
+				3DB26AF8176B32E900A8D833 /* ChatTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
