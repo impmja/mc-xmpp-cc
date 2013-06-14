@@ -42,8 +42,10 @@
 
 #pragma mark NSFetchedResultsController
 - (NSFetchedResultsController *)fetchedResultsController {
-	if (fetchedResultsController == nil) {
-		NSManagedObjectContext *moc = [[self appDelegate] xmppConnection].rosterManagedObjectContext;
+    XMPPConnection * xmppConnection = [[self appDelegate] xmppConnection];
+    
+	if (fetchedResultsController == nil && xmppConnection != nil) {
+		NSManagedObjectContext *moc = xmppConnection.rosterManagedObjectContext;
 		
 		NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject"
 		                                          inManagedObjectContext:moc];
@@ -98,12 +100,22 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[[self fetchedResultsController] sections] count] + 1; // +1 for Options
+    NSFetchedResultsController * frc = [self fetchedResultsController];
+    if (frc != nil) {
+        return [[frc sections] count] + 1; // +1 for Options
+    } else {
+        return 1;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)sender titleForHeaderInSection:(NSInteger)sectionIndex {
-	NSArray *sections = [[self fetchedResultsController] sections];
 	
+    NSFetchedResultsController * frc = [self fetchedResultsController];
+    if (frc == nil) {
+        return @"Options";
+    }
+    
+    NSArray *sections = [frc sections];
 	if (sectionIndex < [sections count]) {
 		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
         
@@ -145,12 +157,21 @@
         XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
         if (user.nickname != nil && [user.nickname length] > 0) {
-            cell.textLabel.text = user.nickname;
+            if (user.unreadMessages != nil && [user.unreadMessages intValue] > 0) {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", user.nickname, user.unreadMessages];
+            } else {
+                cell.textLabel.text = user.nickname;
+            }
         } else {
-            cell.textLabel.text = user.displayName;
+            if (user.unreadMessages != nil && [user.unreadMessages intValue] > 0) {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", user.displayName, user.unreadMessages];
+            } else {
+                cell.textLabel.text = user.displayName;
+            }
         }
         
-        [self configurePhotoForCell:cell user:user];
+         cell.imageView.image = [[[self appDelegate] xmppConnection] findvCardImage:user.jid];
+        //[self configurePhotoForCell:cell user:user];
 	} else {
         cell.textLabel.text = @"Login";
         cell.imageView.image = [UIImage imageNamed:@"bitch_please.png"];
@@ -164,14 +185,28 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // get the selected user & set it as a filter for the chat
-    XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-	
-    [[self appDelegate].chatViewController setCurrentJID:[user.jid full]];
+    NSFetchedResultsController * frc = [self fetchedResultsController];
     
-    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-        [self.slidingViewController resetTopView];
-    }];
+    // get the selected user & set it as a filter for the chat
+    if (frc != nil && indexPath.section < [frc sections].count) {
+        XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        [[self appDelegate].chatViewController setCurrentJID:[user.jid full]];
+        
+        [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+             CGRect frame = self.slidingViewController.topViewController.view.frame;
+            self.slidingViewController.topViewController = [self appDelegate].chatViewController;
+            self.slidingViewController.topViewController.view.frame = frame;
+            [self.slidingViewController resetTopView];
+        }];
+    } else {
+        [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+            CGRect frame = self.slidingViewController.topViewController.view.frame;
+            self.slidingViewController.topViewController = [self appDelegate].loginViewController;
+            self.slidingViewController.topViewController.view.frame = frame;
+            [self.slidingViewController resetTopView];
+        }];
+    }
 }
 
 @end

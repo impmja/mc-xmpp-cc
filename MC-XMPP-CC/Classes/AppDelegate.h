@@ -10,7 +10,7 @@
 
 #import "ECSlidingViewController.h"
 
-#import "MenuViewController.h"
+#import "LoginViewController.h"
 #import "ChatViewController.h"
 #import "FriendsViewController.h"
 
@@ -23,7 +23,7 @@
 @property (strong, nonatomic) UIWindow                      *window;
 @property (strong, nonatomic) UINavigationController        *rootNavigationController;
 @property (strong, nonatomic) ECSlidingViewController       *slidingViewController;
-@property (strong, nonatomic) MenuViewController            *menuViewController;
+@property (strong, nonatomic) LoginViewController           *loginViewController;
 @property (strong, nonatomic) ChatViewController            *chatViewController;
 @property (strong, nonatomic) FriendsViewController         *friendsViewController;
 

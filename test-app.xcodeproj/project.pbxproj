@@ -135,7 +135,7 @@
 		3DAC43BF171DACA600A36A2B /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43BC171DACA600A36A2B /* ECSlidingViewController.m */; };
 		3DAC43C0171DACA600A36A2B /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43BE171DACA600A36A2B /* UIImage+ImageWithUIView.m */; };
 		3DAC43C4171DAE7E00A36A2B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC43C3171DAE7E00A36A2B /* MainStoryboard.storyboard */; };
-		3DAC43C7171DAF5B00A36A2B /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43C6171DAF5B00A36A2B /* MenuViewController.m */; };
+		3DAC43C7171DAF5B00A36A2B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43C6171DAF5B00A36A2B /* LoginViewController.m */; };
 		3DAC43CD171DB5E700A36A2B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43CC171DB5E700A36A2B /* ChatViewController.m */; };
 		3DAC43D0171DC01300A36A2B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43CF171DC01300A36A2B /* FriendsViewController.m */; };
 		3DAC43D4171DCAD500A36A2B /* XMPPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC43D3171DCAD500A36A2B /* XMPPConnection.m */; };
@@ -398,8 +398,8 @@
 		3DAC43BD171DACA600A36A2B /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
 		3DAC43BE171DACA600A36A2B /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
 		3DAC43C3171DAE7E00A36A2B /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		3DAC43C5171DAF5B00A36A2B /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = Classes/MenuViewController.h; sourceTree = "<group>"; };
-		3DAC43C6171DAF5B00A36A2B /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = Classes/MenuViewController.m; sourceTree = "<group>"; };
+		3DAC43C5171DAF5B00A36A2B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/LoginViewController.h; sourceTree = "<group>"; };
+		3DAC43C6171DAF5B00A36A2B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/LoginViewController.m; sourceTree = "<group>"; };
 		3DAC43CB171DB5E700A36A2B /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = Classes/ChatViewController.h; sourceTree = "<group>"; };
 		3DAC43CC171DB5E700A36A2B /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = Classes/ChatViewController.m; sourceTree = "<group>"; };
 		3DAC43CE171DC01200A36A2B /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendsViewController.h; path = Classes/FriendsViewController.h; sourceTree = "<group>"; };
@@ -512,8 +512,8 @@
 				3DAC43D1171DCAAE00A36A2B /* XMPP */,
 				3DAC3F2D171D9AF400A36A2B /* AppDelegate.h */,
 				3DAC3F2E171D9AF400A36A2B /* AppDelegate.m */,
-				3DAC43C5171DAF5B00A36A2B /* MenuViewController.h */,
-				3DAC43C6171DAF5B00A36A2B /* MenuViewController.m */,
+				3DAC43C5171DAF5B00A36A2B /* LoginViewController.h */,
+				3DAC43C6171DAF5B00A36A2B /* LoginViewController.m */,
 				3DAC43CB171DB5E700A36A2B /* ChatViewController.h */,
 				3DAC43CC171DB5E700A36A2B /* ChatViewController.m */,
 				3DAC43CE171DC01200A36A2B /* FriendsViewController.h */,
@@ -1367,7 +1367,7 @@
 				3DAC4284171DA58E00A36A2B /* DDXMLNode.m in Sources */,
 				3DAC43BF171DACA600A36A2B /* ECSlidingViewController.m in Sources */,
 				3DAC43C0171DACA600A36A2B /* UIImage+ImageWithUIView.m in Sources */,
-				3DAC43C7171DAF5B00A36A2B /* MenuViewController.m in Sources */,
+				3DAC43C7171DAF5B00A36A2B /* LoginViewController.m in Sources */,
 				3DAC43CD171DB5E700A36A2B /* ChatViewController.m in Sources */,
 				3DAC43D0171DC01300A36A2B /* FriendsViewController.m in Sources */,
 				3DAC43D4171DCAD500A36A2B /* XMPPConnection.m in Sources */,

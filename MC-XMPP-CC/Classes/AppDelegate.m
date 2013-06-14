@@ -16,7 +16,7 @@
 
 @synthesize rootNavigationController = _rootNavigationController;
 @synthesize slidingViewController = _slideViewController;
-@synthesize menuViewController = _menuViewController;
+@synthesize loginViewController = _loginViewController;
 @synthesize chatViewController = _chatViewController;
 
 
@@ -32,7 +32,7 @@
     
     // create menu view controller
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    _menuViewController = [storyboard instantiateViewControllerWithIdentifier:@"MenuView"];
+    _loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginView"];
     
     // create chat view controller
     _chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChatView"];
@@ -50,10 +50,28 @@
     //[_slideViewController anchorTopViewTo:ECRight];
     
     
-    // TEST
+    /*
+    // check if the user is has logged in
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * serverAddress = [defaults objectForKey:@"serverAddress"];
+    NSNumber * serverPort = [defaults objectForKey:@"serverPort"];
+    NSString * jabberID = [defaults objectForKey:@"jabberID"];
+    NSString * password = [defaults objectForKey:@"password"];
+    
+    // try to establish connection
+    if (serverAddress != nil && serverAddress.length > 0 &&
+        serverPort != nil &&
+        jabberID != nil && jabberID.length > 0 &&
+        password != nil && password.length > 0) {
+        
+        self.xmppConnection = [[XMPPConnection alloc] initWithHost:serverAddress andPort:[serverPort intValue]];
+        [self.xmppConnection connectWithJID:jabberID andPassword:password];
+    }
+    */
+    
+    
     self.xmppConnection = [[XMPPConnection alloc] initWithHost:@"katzensaft.burstdamage.de" andPort:5222];
     [self.xmppConnection connectWithJID:@"test1@xmppserver" andPassword:@"1234"];
-    
     
     return YES;
 }

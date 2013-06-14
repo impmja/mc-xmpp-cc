@@ -385,4 +385,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
+
+-(UIImage*)findvCardImage:(XMPPJID*)_jid {
+    NSData *photoData = [self.xmppvCardAvatarModule photoDataForJID:_jid];
+    if (photoData != nil) {
+        return [UIImage imageWithData:photoData];
+    } else {
+        return [UIImage imageNamed:@"defaultAvatarImage"];
+    }
+}
+
+
 @end

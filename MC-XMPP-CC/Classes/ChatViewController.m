@@ -11,6 +11,7 @@
 
 #import "AppDelegate.h"
 #import "ChatTableViewCell.h"
+#import "ChatTableViewCellSender.h"
 
 
 @interface ChatViewController ()
@@ -35,7 +36,7 @@
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
+    if (![self.slidingViewController.underLeftViewController isKindOfClass:[FriendsViewController class]]) {
         self.slidingViewController.underLeftViewController = appDelegate.friendsViewController;
     }
     
@@ -85,13 +86,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
-	NSArray *sections = [[self fetchedResultsController] sections];
-	
-	if (sectionIndex < [sections count]) {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
-		return sectionInfo.numberOfObjects;
+    NSFetchedResultsController * frc = [self fetchedResultsController];
+    if (frc != nil) {
+        NSArray *sections = [frc sections];
+        
+        if (sectionIndex < [sections count]) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
+            return sectionInfo.numberOfObjects;
+        }
 	}
-	
+    
 	return 0;
 }
 
@@ -111,57 +115,78 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"ChatCell";
-	
-    ChatTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        
-        NSArray * nib = [[NSBundle mainBundle] loadNibNamed:@"ChatTableViewCell" owner:nil options:nil];
-        
-        for (id object in nib) {
-            if ([object isKindOfClass:[ChatTableViewCell class]]) {
-                cell = (ChatTableViewCell *)object;
-                break;
+ 
+    // get message
+    XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+
+    if (msg.isOutgoing) {
+        ChatTableViewCellSender * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCellSender"];
+        if (cell == nil) {
+            
+            NSArray * nib = [[NSBundle mainBundle] loadNibNamed:@"ChatTableViewCell" owner:nil options:nil];
+            
+            for (id object in nib) {
+                if ([object isKindOfClass:[ChatTableViewCellSender class]]) {
+                    cell = (ChatTableViewCellSender *)object;
+                    break;
+                }
             }
         }
-    }
-
-	XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-	cell.chatText.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.chatText.numberOfLines = 0;
-    if (msg.body != nil) {
+        
+        cell.chatText.lineBreakMode = NSLineBreakByWordWrapping;
         cell.chatText.numberOfLines = 0;
-        //cell.chatText.text = [NSString stringWithFormat:@"JIB: %@ - Text:%@", msg.bareJidStr, msg.body];
-        cell.chatText.text = msg.body;
-        cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
-
+        if (msg.body != nil) {
+            cell.chatText.numberOfLines = 0;
+            //cell.chatText.text = [NSString stringWithFormat:@"JIB: %@ - Text:%@", msg.bareJidStr, msg.body];
+            cell.chatText.text = msg.body;
+            cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+        } else {
+            cell.chatText.text = @"<Ist am tippen ...>"; // TODO: Localize
+        }
+        
+        XMPPJID * myJid = [[self appDelegate] xmppConnection].xmppStream.myJID;
+        
+        cell.avatarImage.image = [[[self appDelegate] xmppConnection] findvCardImage:myJid];
+        [cell.avatarImage setClipsToBounds:YES];
+        
+        return cell;
         
     } else {
-        cell.chatText.text = @"<Ist am tippen ...>"; // TODO: Localize
+        ChatTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"];
+        if (cell == nil) {
+            
+            NSArray * nib = [[NSBundle mainBundle] loadNibNamed:@"ChatTableViewCell" owner:nil options:nil];
+            
+            for (id object in nib) {
+                if ([object isKindOfClass:[ChatTableViewCell class]]) {
+                    cell = (ChatTableViewCell *)object;
+                    break;
+                }
+            }
+        }
+        
+        cell.chatText.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.chatText.numberOfLines = 0;
+        if (msg.body != nil) {
+            cell.chatText.numberOfLines = 0;
+            //cell.chatText.text = [NSString stringWithFormat:@"JIB: %@ - Text:%@", msg.bareJidStr, msg.body];
+            cell.chatText.text = msg.body;
+            cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+        } else {
+            cell.chatText.text = @"<Ist am tippen ...>"; // TODO: Localize
+        }
+        
+        cell.avatarImage.image = [[[self appDelegate] xmppConnection] findvCardImage:msg.bareJid];
+        [cell.avatarImage setClipsToBounds:YES];
+        
+        return cell;
     }
-	
-    if (!msg.isOutgoing) {
-        [self configurePhotoForCell:cell withJID:msg.bareJid];
-    }
-    return cell;
+    
+    return nil;
 }
 
 
 #pragma mark UITableViewCell helpers
-- (void)configurePhotoForCell:(ChatTableViewCell *)cell withJID:(XMPPJID *)jid {
-    [cell.avatarImage setClipsToBounds:YES];
-	if (jid == nil) {
-		cell.avatarImage.image = [UIImage imageNamed:@"defaultAvatarImage"];
-	} else {
-		NSData *photoData = [[[[self appDelegate] xmppConnection] xmppvCardAvatarModule] photoDataForJID:jid];
-		if (photoData != nil) {
-			cell.avatarImage.image = [UIImage imageWithData:photoData];
-        } else {
-			cell.avatarImage.image = [UIImage imageNamed:@"defaultAvatarImage"];
-        }
-	}
-}
-
 -(void)scrollToBottom {
     [self.tableView reloadData];
     
@@ -175,8 +200,10 @@
 
 #pragma mark NSFetchedResultsController
 - (NSFetchedResultsController *)fetchedResultsController {
-	if (fetchedResultsController == nil) {
-		NSManagedObjectContext *moc = [[self appDelegate] xmppConnection].messageArchivingManagedObjectContext;
+    XMPPConnection * xmppConnection = [[self appDelegate] xmppConnection];
+    
+	if (fetchedResultsController == nil && xmppConnection != nil) {
+        NSManagedObjectContext *moc = [[self appDelegate] xmppConnection].messageArchivingManagedObjectContext;
 		
 		NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
 		                                          inManagedObjectContext:moc];

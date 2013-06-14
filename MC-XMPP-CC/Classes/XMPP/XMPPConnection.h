@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Jan Schulte. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 #import "XMPPFramework.h"
@@ -52,5 +53,8 @@
 
 #pragma mark - Helper
 - (void)sendMessage:(NSString *)messageStr toJID:(NSString*)jid;
+
+#pragma avatar data
+-(UIImage*)findvCardImage:(XMPPJID*)_jid;
 
 @end
