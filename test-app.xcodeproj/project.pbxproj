@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		171019C6172D3ED800E6D99A /* normal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C4172D3ED800E6D99A /* normal2.png */; };
-		171019C7172D3ED800E6D99A /* retina2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C5172D3ED800E6D99A /* retina2.png */; };
+		175FFAE517745F8500B08E33 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAE217745F8500B08E33 /* iphone.png */; };
+		175FFAE617745F8500B08E33 /* itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAE317745F8500B08E33 /* itunes.png */; };
+		175FFAE717745F8500B08E33 /* retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAE417745F8500B08E33 /* retina.png */; };
+		175FFAE917745FC700B08E33 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAE817745FC700B08E33 /* iphone.png */; };
+		175FFAEB17745FD300B08E33 /* retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAEA17745FD300B08E33 /* retina.png */; };
 		17E5AA89176B554C0073844C /* ChatTableViewCellSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E5AA88176B554C0073844C /* ChatTableViewCellSender.m */; };
 		3D4CCF2F17745E2A00D3FA9E /* FriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D4CCF2E17745E2A00D3FA9E /* FriendTableViewCell.xib */; };
 		3D4CCF3217745F8500D3FA9E /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CCF3117745F8500D3FA9E /* FriendTableViewCell.m */; };
@@ -20,9 +23,6 @@
 		3DAC3F16171D98DA00A36A2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */; };
 		3DAC3F18171D98DA00A36A2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC3F17171D98DA00A36A2B /* main.m */; };
 		3DAC3F2F171D9AF400A36A2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC3F2E171D9AF400A36A2B /* AppDelegate.m */; };
-		3DAC3F33171D9B0500A36A2B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */; };
-		3DAC3F34171D9B0500A36A2B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F31171D9B0500A36A2B /* Default.png */; };
-		3DAC3F35171D9B0500A36A2B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC3F32171D9B0500A36A2B /* Default@2x.png */; };
 		3DAC3F39171DA2F700A36A2B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F38171DA2F700A36A2B /* SystemConfiguration.framework */; };
 		3DAC3F3B171DA30000A36A2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F3A171DA30000A36A2B /* CoreData.framework */; };
 		3DAC3F3D171DA30B00A36A2B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F3C171DA30B00A36A2B /* CFNetwork.framework */; };
@@ -148,8 +148,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		171019C4172D3ED800E6D99A /* normal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normal2.png; path = Resources/Images/normal2.png; sourceTree = "<group>"; };
-		171019C5172D3ED800E6D99A /* retina2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retina2.png; path = Resources/Images/retina2.png; sourceTree = "<group>"; };
+		175FFAE217745F8500B08E33 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iphone.png; path = ../../../../Users/florian/Desktop/iphone.png; sourceTree = "<group>"; };
+		175FFAE317745F8500B08E33 /* itunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = itunes.png; path = ../../../../Users/florian/Desktop/itunes.png; sourceTree = "<group>"; };
+		175FFAE417745F8500B08E33 /* retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retina.png; path = ../../../../Users/florian/Desktop/retina.png; sourceTree = "<group>"; };
+		175FFAE817745FC700B08E33 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
+		175FFAEA17745FD300B08E33 /* retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retina.png; sourceTree = "<group>"; };
 		17E5AA87176B554C0073844C /* ChatTableViewCellSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCellSender.h; path = Classes/ChatTableViewCellSender.h; sourceTree = "<group>"; };
 		17E5AA88176B554C0073844C /* ChatTableViewCellSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCellSender.m; path = Classes/ChatTableViewCellSender.m; sourceTree = "<group>"; };
 		3D4CCF2E17745E2A00D3FA9E /* FriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FriendTableViewCell.xib; path = Resources/FriendTableViewCell.xib; sourceTree = "<group>"; };
@@ -169,9 +172,6 @@
 		3DAC3F19171D98DA00A36A2B /* test-app-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test-app-Prefix.pch"; sourceTree = "<group>"; };
 		3DAC3F2D171D9AF400A36A2B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		3DAC3F2E171D9AF400A36A2B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Images/Default-568h@2x.png"; sourceTree = "<group>"; };
-		3DAC3F31171D9B0500A36A2B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Images/Default.png; sourceTree = "<group>"; };
-		3DAC3F32171D9B0500A36A2B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Images/Default@2x.png"; sourceTree = "<group>"; };
 		3DAC3F38171DA2F700A36A2B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3DAC3F3A171DA30000A36A2B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3DAC3F3C171DA30B00A36A2B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -453,6 +453,8 @@
 		3DAC3EFF171D98DA00A36A2B = {
 			isa = PBXGroup;
 			children = (
+				175FFAEA17745FD300B08E33 /* retina.png */,
+				175FFAE817745FC700B08E33 /* iphone.png */,
 				3DAC3F11171D98DA00A36A2B /* MC-XMPP-CC */,
 				3D6790831762098A0061B88D /* DAKeyboardControl */,
 				3DAC3F46171DA58900A36A2B /* XMPPFramework */,
@@ -545,13 +547,11 @@
 		3DAC3F2C171D998A00A36A2B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				175FFAE217745F8500B08E33 /* iphone.png */,
+				175FFAE317745F8500B08E33 /* itunes.png */,
+				175FFAE417745F8500B08E33 /* retina.png */,
 				3DB26AFB176B515B00A8D833 /* bitch_please.png */,
-				3DAC3F30171D9B0500A36A2B /* Default-568h@2x.png */,
-				3DAC3F31171D9B0500A36A2B /* Default.png */,
-				3DAC3F32171D9B0500A36A2B /* Default@2x.png */,
 				3DB26AF9176B3A2A00A8D833 /* defaultAvatarImage.png */,
-				171019C4172D3ED800E6D99A /* normal2.png */,
-				171019C5172D3ED800E6D99A /* retina2.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1249,16 +1249,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DAC3F16171D98DA00A36A2B /* InfoPlist.strings in Resources */,
-				3DAC3F33171D9B0500A36A2B /* Default-568h@2x.png in Resources */,
-				3DAC3F34171D9B0500A36A2B /* Default.png in Resources */,
-				3DAC3F35171D9B0500A36A2B /* Default@2x.png in Resources */,
 				3DAC43C4171DAE7E00A36A2B /* MainStoryboard.storyboard in Resources */,
-				171019C6172D3ED800E6D99A /* normal2.png in Resources */,
-				171019C7172D3ED800E6D99A /* retina2.png in Resources */,
 				3DB26AF5176B303100A8D833 /* ChatTableViewCell.xib in Resources */,
 				3DB26AFA176B3A2A00A8D833 /* defaultAvatarImage.png in Resources */,
 				3DB26AFC176B515B00A8D833 /* bitch_please.png in Resources */,
 				3D4CCF2F17745E2A00D3FA9E /* FriendTableViewCell.xib in Resources */,
+				175FFAE517745F8500B08E33 /* iphone.png in Resources */,
+				175FFAE617745F8500B08E33 /* itunes.png in Resources */,
+				175FFAE717745F8500B08E33 /* retina.png in Resources */,
+				175FFAE917745FC700B08E33 /* iphone.png in Resources */,
+				175FFAEB17745FD300B08E33 /* retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
