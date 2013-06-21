@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1735FF0E17747E9C00383B6A /* splashretina.png in Resources */ = {isa = PBXBuildFile; fileRef = 1735FF0D17747E9C00383B6A /* splashretina.png */; };
+		1735FF1617747F2800383B6A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1735FF1517747F2800383B6A /* Default-568h@2x.png */; };
 		175F7560177473F30083FF3E /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 175F755F177473F30083FF3E /* settings.png */; };
 		177522C8177476520002FEFF /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 177522C5177476520002FEFF /* iphone.png */; };
 		177522C9177476520002FEFF /* itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 177522C6177476520002FEFF /* itunes.png */; };
@@ -147,6 +149,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1735FF0D17747E9C00383B6A /* splashretina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashretina.png; path = Resources/Images/splashretina.png; sourceTree = "<group>"; };
+		1735FF1517747F2800383B6A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		175F755F177473F30083FF3E /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Resources/Images/settings.png; sourceTree = "<group>"; };
 		177522C5177476520002FEFF /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iphone.png; path = Resources/Images/iphone.png; sourceTree = "<group>"; };
 		177522C6177476520002FEFF /* itunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = itunes.png; path = Resources/Images/itunes.png; sourceTree = "<group>"; };
@@ -543,6 +547,8 @@
 		3DAC3F2C171D998A00A36A2B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1735FF1517747F2800383B6A /* Default-568h@2x.png */,
+				1735FF0D17747E9C00383B6A /* splashretina.png */,
 				177522C5177476520002FEFF /* iphone.png */,
 				177522C6177476520002FEFF /* itunes.png */,
 				177522C7177476520002FEFF /* retina.png */,
@@ -1255,6 +1261,8 @@
 				177522C8177476520002FEFF /* iphone.png in Resources */,
 				177522C9177476520002FEFF /* itunes.png in Resources */,
 				177522CA177476520002FEFF /* retina.png in Resources */,
+				1735FF0E17747E9C00383B6A /* splashretina.png in Resources */,
+				1735FF1617747F2800383B6A /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
