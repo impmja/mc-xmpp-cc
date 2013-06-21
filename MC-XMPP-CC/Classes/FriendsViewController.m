@@ -233,6 +233,9 @@
         cell.friendImage.image = [UIImage imageNamed:@"bitch_please.png"];
     }
     
+    [cell.friendImage.layer setBorderColor: [[UIColor blackColor] CGColor]];
+    [cell.friendImage.layer setBorderWidth: 2.0];
+    
 	return cell;
 }
 

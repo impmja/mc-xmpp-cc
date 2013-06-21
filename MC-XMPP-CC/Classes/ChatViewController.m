@@ -34,17 +34,11 @@
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
     
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = [self appDelegate];
     
     if (![self.slidingViewController.underLeftViewController isKindOfClass:[FriendsViewController class]]) {
         self.slidingViewController.underLeftViewController = appDelegate.friendsViewController;
     }
-    
-    /*
-    if (![self.slidingViewController.underRightViewController isKindOfClass:[MenuViewController class]]) {
-        self.slidingViewController.underRightViewController = appDelegate.friendsViewController;
-    }
-    */
     
     self.slidingViewController.anchorLeftPeekAmount = 40;
     self.slidingViewController.anchorLeftRevealAmount = 320.0f;
@@ -102,15 +96,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     NSString *cellText = msg.body;
-
+    if (cellText == nil) {
+        cellText = @"<Is typing ...>";
+    }
+    
     CGSize stringSize = [cellText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(250.0f, 400.0f) lineBreakMode:NSLineBreakByWordWrapping];
             
     return stringSize.height + 62;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
-    // get message
+
     XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
     if (msg.isOutgoing) {
@@ -130,21 +126,19 @@
         cell.chatText.lineBreakMode = NSLineBreakByWordWrapping;
         cell.chatText.numberOfLines = 0;
         if (msg.body != nil) {
-            cell.chatText.numberOfLines = 0;
-            //cell.chatText.text = [NSString stringWithFormat:@"JIB: %@ - Text:%@", msg.bareJidStr, msg.body];
             cell.chatText.text = msg.body;
-            cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
         } else {
-            cell.chatText.text = @"<Ist am tippen ...>"; // TODO: Localize
+            cell.chatText.text = @"<Is typing ...>"; // TODO: Localize
         }
         
         XMPPJID * myJid = [[self appDelegate] xmppConnection].xmppStream.myJID;
         
         cell.avatarImage.image = [[[self appDelegate] xmppConnection] findvCardImage:myJid];
+        [cell.avatarImage.layer setBorderColor: [[UIColor blackColor] CGColor]];
+        [cell.avatarImage.layer setBorderWidth: 2.0];
         [cell.avatarImage setClipsToBounds:YES];
         
         return cell;
-        
     } else {
         ChatTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"];
         if (cell == nil) {
@@ -162,15 +156,14 @@
         cell.chatText.lineBreakMode = NSLineBreakByWordWrapping;
         cell.chatText.numberOfLines = 0;
         if (msg.body != nil) {
-            cell.chatText.numberOfLines = 0;
-            //cell.chatText.text = [NSString stringWithFormat:@"JIB: %@ - Text:%@", msg.bareJidStr, msg.body];
             cell.chatText.text = msg.body;
-            cell.chatText.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
         } else {
-            cell.chatText.text = @"<Ist am tippen ...>"; // TODO: Localize
+            cell.chatText.text = @"<Is typing ...>"; // TODO: Localize
         }
         
         cell.avatarImage.image = [[[self appDelegate] xmppConnection] findvCardImage:msg.bareJid];
+        [cell.avatarImage.layer setBorderColor: [[UIColor whiteColor] CGColor]];
+        [cell.avatarImage.layer setBorderWidth: 2.0];
         [cell.avatarImage setClipsToBounds:YES];
         
         return cell;
