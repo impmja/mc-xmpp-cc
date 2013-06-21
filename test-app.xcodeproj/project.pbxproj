@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		175F7560177473F30083FF3E /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 175F755F177473F30083FF3E /* settings.png */; };
 		175FFAE517745F8500B08E33 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAE217745F8500B08E33 /* iphone.png */; };
 		175FFAE617745F8500B08E33 /* itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAE317745F8500B08E33 /* itunes.png */; };
 		175FFAE717745F8500B08E33 /* retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 175FFAE417745F8500B08E33 /* retina.png */; };
@@ -148,6 +149,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		175F755F177473F30083FF3E /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Resources/Images/settings.png; sourceTree = "<group>"; };
 		175FFAE217745F8500B08E33 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iphone.png; path = ../../../../Users/florian/Desktop/iphone.png; sourceTree = "<group>"; };
 		175FFAE317745F8500B08E33 /* itunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = itunes.png; path = ../../../../Users/florian/Desktop/itunes.png; sourceTree = "<group>"; };
 		175FFAE417745F8500B08E33 /* retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retina.png; path = ../../../../Users/florian/Desktop/retina.png; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 		3DAC3F2C171D998A00A36A2B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				175F755F177473F30083FF3E /* settings.png */,
 				175FFAE217745F8500B08E33 /* iphone.png */,
 				175FFAE317745F8500B08E33 /* itunes.png */,
 				175FFAE417745F8500B08E33 /* retina.png */,
@@ -1259,6 +1262,7 @@
 				175FFAE717745F8500B08E33 /* retina.png in Resources */,
 				175FFAE917745FC700B08E33 /* iphone.png in Resources */,
 				175FFAEB17745FD300B08E33 /* retina.png in Resources */,
+				175F7560177473F30083FF3E /* settings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
