@@ -43,7 +43,7 @@
 							<object class="IBUIImageView" id="623504193">
 								<reference key="NSNextResponder" ref="63374620"/>
 								<int key="NSvFlags">276</int>
-								<string key="NSFrame">{{5, 5}, {310, 75}}</string>
+								<string key="NSFrame">{{0, 1}, {320, 84}}</string>
 								<reference key="NSSuperview" ref="63374620"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="451491721"/>
@@ -75,7 +75,7 @@
 							<object class="IBUILabel" id="837140034">
 								<reference key="NSNextResponder" ref="63374620"/>
 								<int key="NSvFlags">308</int>
-								<string key="NSFrame">{{82, 10}, {231, 64}}</string>
+								<string key="NSFrame">{{84, 10}, {224, 64}}</string>
 								<reference key="NSSuperview" ref="63374620"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -109,7 +109,7 @@
 									<int key="NSfFlags">16</int>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-								<double key="preferredMaxLayoutWidth">231</double>
+								<double key="preferredMaxLayoutWidth">224</double>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 85}</string>
@@ -152,7 +152,7 @@
 							<object class="IBUIImageView" id="718807790">
 								<reference key="NSNextResponder" ref="92677349"/>
 								<int key="NSvFlags">276</int>
-								<string key="NSFrame">{{5, 5}, {310, 75}}</string>
+								<string key="NSFrame">{{0, 1}, {320, 84}}</string>
 								<reference key="NSSuperview" ref="92677349"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="223702573"/>
@@ -177,7 +177,7 @@
 							<object class="IBUILabel" id="223702573">
 								<reference key="NSNextResponder" ref="92677349"/>
 								<int key="NSvFlags">308</int>
-								<string key="NSFrame">{{10, 10}, {231, 64}}</string>
+								<string key="NSFrame">{{12, 10}, {224, 64}}</string>
 								<reference key="NSSuperview" ref="92677349"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="748489243"/>
@@ -200,7 +200,7 @@
 								<reference key="IBUIFontDescription" ref="808205996"/>
 								<reference key="IBUIFont" ref="646933254"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-								<double key="preferredMaxLayoutWidth">231</double>
+								<double key="preferredMaxLayoutWidth">224</double>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 85}</string>

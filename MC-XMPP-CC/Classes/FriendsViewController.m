@@ -79,26 +79,6 @@
 	[[self tableView] reloadData];
 }
 
-
-#pragma mark UITableViewCell helpers
-/*
-- (void)configurePhotoForCell:(UITableViewCell *)cell user:(XMPPUserCoreDataStorageObject *)user {
-	// Our xmppRosterStorage will cache photos as they arrive from the xmppvCardAvatarModule.
-	// We only need to ask the avatar module for a photo, if the roster doesn't have it.
-	
-	if (user.photo != nil) {
-		cell.imageView.image = user.photo;
-	} else {
-		NSData *photoData = [[[[self appDelegate] xmppConnection] xmppvCardAvatarModule] photoDataForJID:user.jid];
-        
-		if (photoData != nil)
-			cell.imageView.image = [UIImage imageWithData:photoData];
-		else
-			cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
-	}
-}
-*/
-
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSFetchedResultsController * frc = [self fetchedResultsController];
@@ -112,31 +92,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40.0f;
 }
-
-/*
-- (NSString *)tableView:(UITableView *)sender titleForHeaderInSection:(NSInteger)sectionIndex {
-	
-    NSFetchedResultsController * frc = [self fetchedResultsController];
-    if (frc == nil) {
-        return @"Options";
-    }
-    
-    NSArray *sections = [frc sections];
-	if (sectionIndex < [sections count]) {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
-        
-		int section = [sectionInfo.name intValue];
-		switch (section) {
-			case 0  : return @"Available";
-			case 1  : return @"Away";
-			default : return @"Offline";
-		}
-	} else {
-        return @"Options";
-    }
-}
-*/
-
 
 // Change section header colors
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -230,7 +185,7 @@
          cell.friendImage.image = [[[self appDelegate] xmppConnection] findvCardImage:user.jid];
 	} else {
         cell.friendName.text = @"Login";
-        cell.friendImage.image = [UIImage imageNamed:@"bitch_please.png"];
+        cell.friendImage.image = [UIImage imageNamed:@"settings.png"];
     }
     
     [cell.friendImage.layer setBorderColor: [[UIColor blackColor] CGColor]];
@@ -265,6 +220,17 @@
             [self.slidingViewController resetTopView];
         }];
     }
+    
+    FriendTableViewCell * cell = (FriendTableViewCell*)  [tableView cellForRowAtIndexPath:indexPath];
+    [cell.friendImage.layer setBorderColor: [[UIColor whiteColor] CGColor]];
+    [cell.friendImage.layer setBorderWidth: 2.0];
+}
+
+
+-(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    FriendTableViewCell * cell = (FriendTableViewCell*)  [tableView cellForRowAtIndexPath:indexPath];
+    [cell.friendImage.layer setBorderColor: [[UIColor blackColor] CGColor]];
+    [cell.friendImage.layer setBorderWidth: 2.0];
 }
 
 @end
