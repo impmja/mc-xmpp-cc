@@ -10,6 +10,8 @@
 		171019C6172D3ED800E6D99A /* normal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C4172D3ED800E6D99A /* normal2.png */; };
 		171019C7172D3ED800E6D99A /* retina2.png in Resources */ = {isa = PBXBuildFile; fileRef = 171019C5172D3ED800E6D99A /* retina2.png */; };
 		17E5AA89176B554C0073844C /* ChatTableViewCellSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E5AA88176B554C0073844C /* ChatTableViewCellSender.m */; };
+		3D4CCF2F17745E2A00D3FA9E /* FriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D4CCF2E17745E2A00D3FA9E /* FriendTableViewCell.xib */; };
+		3D4CCF3217745F8500D3FA9E /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CCF3117745F8500D3FA9E /* FriendTableViewCell.m */; };
 		3D6790861762098A0061B88D /* DAKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6790851762098A0061B88D /* DAKeyboardControl.m */; };
 		3DA01E5E174F70BB007A1C66 /* NSXMLElement+XEP_0203.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA01E5D174F70BB007A1C66 /* NSXMLElement+XEP_0203.m */; };
 		3DAC3F0C171D98DA00A36A2B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC3F0B171D98DA00A36A2B /* UIKit.framework */; };
@@ -150,6 +152,9 @@
 		171019C5172D3ED800E6D99A /* retina2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retina2.png; path = Resources/Images/retina2.png; sourceTree = "<group>"; };
 		17E5AA87176B554C0073844C /* ChatTableViewCellSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCellSender.h; path = Classes/ChatTableViewCellSender.h; sourceTree = "<group>"; };
 		17E5AA88176B554C0073844C /* ChatTableViewCellSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCellSender.m; path = Classes/ChatTableViewCellSender.m; sourceTree = "<group>"; };
+		3D4CCF2E17745E2A00D3FA9E /* FriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FriendTableViewCell.xib; path = Resources/FriendTableViewCell.xib; sourceTree = "<group>"; };
+		3D4CCF3017745F8500D3FA9E /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendTableViewCell.h; path = Classes/FriendTableViewCell.h; sourceTree = "<group>"; };
+		3D4CCF3117745F8500D3FA9E /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendTableViewCell.m; path = Classes/FriendTableViewCell.m; sourceTree = "<group>"; };
 		3D6790841762098A0061B88D /* DAKeyboardControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAKeyboardControl.h; sourceTree = "<group>"; };
 		3D6790851762098A0061B88D /* DAKeyboardControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAKeyboardControl.m; sourceTree = "<group>"; };
 		3DA01E5C174F70BB007A1C66 /* NSXMLElement+XEP_0203.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLElement+XEP_0203.h"; sourceTree = "<group>"; };
@@ -502,6 +507,7 @@
 				3DAC3F14171D98DA00A36A2B /* InfoPlist.strings */,
 				3DAC3F19171D98DA00A36A2B /* test-app-Prefix.pch */,
 				3DB26AF4176B303100A8D833 /* ChatTableViewCell.xib */,
+				3D4CCF2E17745E2A00D3FA9E /* FriendTableViewCell.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -522,6 +528,8 @@
 				3DB26AF7176B32E900A8D833 /* ChatTableViewCell.m */,
 				17E5AA87176B554C0073844C /* ChatTableViewCellSender.h */,
 				17E5AA88176B554C0073844C /* ChatTableViewCellSender.m */,
+				3D4CCF3017745F8500D3FA9E /* FriendTableViewCell.h */,
+				3D4CCF3117745F8500D3FA9E /* FriendTableViewCell.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1250,6 +1258,7 @@
 				3DB26AF5176B303100A8D833 /* ChatTableViewCell.xib in Resources */,
 				3DB26AFA176B3A2A00A8D833 /* defaultAvatarImage.png in Resources */,
 				3DB26AFC176B515B00A8D833 /* bitch_please.png in Resources */,
+				3D4CCF2F17745E2A00D3FA9E /* FriendTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1384,7 @@
 				3D6790861762098A0061B88D /* DAKeyboardControl.m in Sources */,
 				3DB26AF8176B32E900A8D833 /* ChatTableViewCell.m in Sources */,
 				17E5AA89176B554C0073844C /* ChatTableViewCellSender.m in Sources */,
+				3D4CCF3217745F8500D3FA9E /* FriendTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

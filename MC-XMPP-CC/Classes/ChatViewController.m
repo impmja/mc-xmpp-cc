@@ -99,17 +99,11 @@
 	return 0;
 }
 
-
-
-#define kTimelineTextFieldWidth 250.0f
-#define kMaxTimelineTextFieldHeight 400.0f
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     NSString *cellText = msg.body;
 
-    CGSize stringSize = [cellText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(kTimelineTextFieldWidth, kMaxTimelineTextFieldHeight) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize stringSize = [cellText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(250.0f, 400.0f) lineBreakMode:NSLineBreakByWordWrapping];
             
     return stringSize.height + 62;
 }

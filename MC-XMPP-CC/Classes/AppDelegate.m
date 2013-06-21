@@ -69,7 +69,6 @@
     }
     */
     
-    
     self.xmppConnection = [[XMPPConnection alloc] initWithHost:@"katzensaft.burstdamage.de" andPort:5222];
     [self.xmppConnection connectWithJID:@"test1@xmppserver" andPassword:@"1234"];
     

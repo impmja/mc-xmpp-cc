@@ -35,8 +35,11 @@
     [self.password setAutocorrectionType:UITextAutocorrectionTypeNo];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+    self.view.layer.shadowOpacity = 0.75f;
+    self.view.layer.shadowRadius = 10.0f;
+    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+    
     self.slidingViewController.anchorLeftRevealAmount = 320.0f;
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
 }
