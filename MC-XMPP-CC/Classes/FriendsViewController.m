@@ -3,7 +3,7 @@
 //  MC-XMPP-CC
 //
 //  Created by Jan Schulte on 16.04.13.
-//  Copyright (c) 2013 Jan Schulte. All rights reserved.
+//  Copyright (c) 2013 Jan Schulte, Florian Kaluschke. All rights reserved.
 //
 
 #import "FriendsViewController.h"
@@ -36,6 +36,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.slidingViewController.anchorRightRevealAmount = 280.0f;
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
+    
+    [self.tableView reloadData];
 }
 
 
@@ -204,7 +206,7 @@
     if (frc != nil && indexPath.section < [frc sections].count) {
         XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
-        [[self appDelegate].chatViewController setCurrentJID:[user.jid full]];
+        [[self appDelegate].chatViewController setReceiverJID:[user.jid full]];
         
         [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
              CGRect frame = self.slidingViewController.topViewController.view.frame;

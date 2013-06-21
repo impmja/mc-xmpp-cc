@@ -3,7 +3,7 @@
 //  MC-XMPP-CC
 //
 //  Created by Jan Schulte on 16.04.13.
-//  Copyright (c) 2013 Jan Schulte. All rights reserved.
+//  Copyright (c) 2013 Jan Schulte, Florian Kaluschke. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,10 +11,16 @@
 
 #import "XMPPFramework.h"
 
-/*
-    TODO: - (void)configurePhotoForCell:(UITableViewCell *)cell user:(XMPPUserCoreDataStorageObject *)user {
-    nach hier verschieben und aus den Controller aufrufen
-*/
+
+@class XMPPConnection;
+
+
+@protocol XMPPConnectionDelegate <NSObject>
+@optional
+- (void)onXMPPConnectionSucceeded:(XMPPConnection *)sender;
+- (void)onXMPPConnectionFailed:(XMPPConnection *)sender withError:(NSError*) error;
+@end
+
 
 @interface XMPPConnection : NSObject <XMPPRosterDelegate> {
     NSString                            *password;
@@ -33,6 +39,7 @@
 @property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage     *xmppMessageArchivingStorage;
 @property (nonatomic, strong, readonly) XMPPMessageArchiving                    *xmppMessageArchiving;
 
+@property (nonatomic, assign) id <XMPPConnectionDelegate>                       delegate;
 
 @property (nonatomic, strong, readonly) NSString        *password;
 @property (nonatomic, assign, readonly) BOOL            isConnected;

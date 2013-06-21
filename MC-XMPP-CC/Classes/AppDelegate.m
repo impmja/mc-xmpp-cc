@@ -3,7 +3,7 @@
 //  MC-XMPP-CC
 //
 //  Created by Jan Schulte on 16.04.13.
-//  Copyright (c) 2013 Jan Schulte. All rights reserved.
+//  Copyright (c) 2013 Jan Schulte, Florian Kaluschke. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -50,7 +50,6 @@
     //[_slideViewController anchorTopViewTo:ECRight];
     
     
-    /*
     // check if the user is has logged in
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * serverAddress = [defaults objectForKey:@"serverAddress"];
@@ -67,10 +66,11 @@
         self.xmppConnection = [[XMPPConnection alloc] initWithHost:serverAddress andPort:[serverPort intValue]];
         [self.xmppConnection connectWithJID:jabberID andPassword:password];
     }
-    */
-    
+ 
+    /*
     self.xmppConnection = [[XMPPConnection alloc] initWithHost:@"katzensaft.burstdamage.de" andPort:5222];
     [self.xmppConnection connectWithJID:@"test1@xmppserver" andPassword:@"1234"];
+    */
     
     return YES;
 }

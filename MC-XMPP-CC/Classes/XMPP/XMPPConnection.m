@@ -3,7 +3,7 @@
 //  MC-XMPP-CC
 //
 //  Created by Jan Schulte on 16.04.13.
-//  Copyright (c) 2013 Jan Schulte. All rights reserved.
+//  Copyright (c) 2013 Jan Schulte, Florian Kaluschke. All rights reserved.
 //
 
 #import "XMPPConnection.h"
@@ -178,9 +178,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 
 #pragma mark - Delegate Handling
+/*
 - (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
+*/
 
 - (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings
 {
@@ -227,9 +229,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	}
 }
 
+/*
 - (void)xmppStreamDidSecure:(XMPPStream *)sender {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
+*/
 
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
 	isConnected = YES;
@@ -237,26 +241,33 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	NSError *error = nil;
 	
 	if (![[self xmppStream] authenticateWithPassword:password error:&error]) {
-		DDLogError(@"Error authenticating: %@", error);
+		NSLog(@"Error authenticating: %@", error);
 	}
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
 	[self switchToOnline];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onXMPPConnectionSucceeded:)] ) {
+        [self.delegate onXMPPConnectionSucceeded:self];
+    }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onXMPPConnectionFailed:withError:)] ) {
+        [self.delegate onXMPPConnectionFailed:self withError:[NSError errorWithDomain:@"XMPPConnection" code:1 userInfo:[NSDictionary dictionaryWithObjects:@[@"Failed to authenticate."] forKeys:@[NSLocalizedDescriptionKey]]]];
+    }
 }
 
+/*
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	
 	return NO;
 }
+*/
 
+/*
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
 	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
@@ -273,15 +284,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
             NSLog(@"Message: %@", body);
-
-            /*
-			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
-                                                                message:body
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-			[alertView show];
-            */
 		} else {
 			// We are not active, so use a local notification instead
 			UILocalNotification *localNotification = [[UILocalNotification alloc] init];
@@ -293,29 +295,31 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	}
      
 }
+*/
 
+/*
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
 	DDLogVerbose(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, [presence fromStr]);
 }
+*/
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+	if (self.delegate && [self.delegate respondsToSelector:@selector(onXMPPConnectionFailed:withError:)] ) {
+        [self.delegate onXMPPConnectionFailed:self withError:[NSError errorWithDomain:@"XMPPConnection" code:1 userInfo:[NSDictionary dictionaryWithObjects:@[@"Failed to connect."] forKeys:@[NSLocalizedDescriptionKey]]]];
+    }
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
 	if (!isConnected) {
-		DDLogError(@"Unable to connect to server. Check xmppStream.hostName");
-	}
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onXMPPConnectionFailed:withError:)] ) {
+            [self.delegate onXMPPConnectionFailed:self withError:[NSError errorWithDomain:@"XMPPConnection" code:1 userInfo:[NSDictionary dictionaryWithObjects:@[@"Unable to connect to server."] forKeys:@[NSLocalizedDescriptionKey]]]];
+        }
+    }
 }
-
 
 #pragma mark - Roster
 - (void)xmppRoster:(XMPPRoster *)sender didReceiveBuddyRequest:(XMPPPresence *)presence
 {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
 	XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[presence from]
 	                                                         xmppStream:xmppStream
 	                                               managedObjectContext:[self rosterManagedObjectContext]];

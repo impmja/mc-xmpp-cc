@@ -3,7 +3,7 @@
 //  MC-XMPP-CC
 //
 //  Created by Jan Schulte on 16.04.13.
-//  Copyright (c) 2013 Jan Schulte. All rights reserved.
+//  Copyright (c) 2013 Jan Schulte, Florian Kaluschke. All rights reserved.
 //
 
 #import "ChatViewController.h"
@@ -41,15 +41,17 @@
     }
     
     self.slidingViewController.anchorLeftPeekAmount = 40;
-    self.slidingViewController.anchorLeftRevealAmount = 320.0f;
+    self.slidingViewController.anchorLeftRevealAmount = 280.0f;
     self.slidingViewController.anchorRightPeekAmount = 40;
-    self.slidingViewController.anchorRightRevealAmount = 320.0f;
+    self.slidingViewController.anchorRightRevealAmount = 280.0f;
     
     
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
 
     self.view.keyboardTriggerOffset = self.toolBar.bounds.size.height;
+    self.textField.keyboardAppearance = UIKeyboardAppearanceAlert;
+    self.textField.enablesReturnKeyAutomatically = YES;
     
     __weak ChatViewController * bSelf = self;
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
@@ -65,7 +67,7 @@
         [bSelf scrollToBottom];
     }];
     
-    if (_currentJID != nil) {
+    if (_receiverJID != nil) {
         [self showChatTableView:YES];
         [self scrollToBottom];
     } else {
@@ -212,7 +214,7 @@
 		
 		NSError *error = nil;
 		if (![fetchedResultsController performFetch:&error]) {
-			//DDLogError(@"Error performing fetch: %@", error);
+			NSLog(@"Error performing fetch: %@", error);
 		}
 	}
 	
@@ -225,23 +227,25 @@
 
 
 #pragma mark Setter
--(void)setCurrentJID:(NSString *)jid {
+-(void)setReceiverJID:(NSString *)jid {
 
-    _currentJID = jid;
+    _receiverJID = jid;
 
-    [fetchedResultsController.fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"bareJidStr == %@", _currentJID]];
+    NSString * myJID = [[self appDelegate] xmppConnection].xmppStream.myJID.bare;
+    [fetchedResultsController.fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(bareJidStr == %@) AND (streamBareJidStr == %@)", _receiverJID, myJID]];
     
     NSError *error = nil;
     if (![fetchedResultsController performFetch:&error]) {
-        //DDLogError(@"Error performing fetch: %@", error);
+        NSLog(@"Error performing fetch: %@", error);
     } else {
         [self controllerDidChangeContent:fetchedResultsController];
     }
     
-    if (_currentJID != nil) {
+    if (_receiverJID != nil) {
        [self showChatTableView:YES];
+       [self scrollToBottom];
     } else {
-       [self showChatTableView:YES];
+       [self showChatTableView:NO];
     }
 }
 
@@ -250,7 +254,7 @@
     if (self.textField.text.length > 0) {
         [self.view hideKeyboard];
     
-        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:self.currentJID];
+        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:_receiverJID];
         
         self.textField.text = @"";
     }
@@ -260,7 +264,7 @@
     if (self.textField.text.length > 0) {
         [self.view hideKeyboard];
     
-        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:self.currentJID];
+        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:_receiverJID];
         
         self.textField.text = @"";
         
@@ -273,8 +277,8 @@
 
 -(void)showChatTableView:(BOOL)show {
     [self.noConversationView setHidden:show];
-    [self.tableView setHidden:!show];
-    [self.toolBar setHidden:!show];
+    //[self.tableView setHidden:!show];
+    //[self.toolBar setHidden:!show];
 }
 
 
