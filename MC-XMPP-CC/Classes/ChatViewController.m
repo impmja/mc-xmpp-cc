@@ -105,6 +105,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    // fetch object from CoreData
     XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
     if (msg.isOutgoing) {
@@ -172,6 +173,7 @@
 
 #pragma mark UITableViewCell helpers
 -(void)scrollToBottom {
+
     [self.tableView reloadData];
     
     if (self.fetchedResultsController.fetchedObjects != nil && [self.fetchedResultsController.fetchedObjects count] > 0) {
@@ -187,7 +189,7 @@
 
     XMPPConnection * xmppConnection = [AppDelegate sharedAppDelegate].xmppConnection;
     
-    // Create the FetchResultController if needed
+    // Create the FetchResultController (bridge between UI and CoreData)
 	if (fetchedResultsController == nil && xmppConnection != nil) {
         NSManagedObjectContext * moc = xmppConnection.messageArchivingManagedObjectContext;
 		
@@ -201,7 +203,7 @@
 		NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
 		[fetchRequest setEntity:entity];
 		[fetchRequest setSortDescriptors:sortDescriptors];
-		[fetchRequest setFetchBatchSize:20];    // most important property ;)
+		[fetchRequest setFetchBatchSize:20];    // most important property ;) - Define "view" range the controller should fetch from CoreData persistance cache
         
 		fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 		                                                               managedObjectContext:moc

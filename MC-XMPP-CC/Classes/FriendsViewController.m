@@ -36,7 +36,7 @@
 #pragma mark NSFetchedResultsController
 - (NSFetchedResultsController *)fetchedResultsController {
 
-    // Check if there is a connection and only then create the fetch controller otherewise show only the options menu
+    // Check if there is a connection and only then create the fetch controller otherwise show only the options menu
     XMPPConnection * xmppConnection = [AppDelegate sharedAppDelegate].xmppConnection;
     
 	if (fetchedResultsController == nil && xmppConnection != nil) {
@@ -157,6 +157,7 @@
     }
     
     if (indexPath.section < [[self fetchedResultsController] sections].count) {
+        // fetch contact (user) from CoreData persistance cache
         XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
         if (user.nickname != nil && [user.nickname length] > 0) {
