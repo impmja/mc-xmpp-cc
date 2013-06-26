@@ -52,16 +52,18 @@
 //
 @interface XMPPConnection : NSObject <XMPPRosterDelegate>
 
-#pragma mark - Properties
+#pragma mark - XMPPStream
 @property (nonatomic, strong, readonly) XMPPStream                              *xmppStream;
+
+#pragma mark - XMPPStream Extensions (Modules)
 @property (nonatomic, strong, readonly) XMPPReconnect                           *xmppReconnect;
 @property (nonatomic, strong, readonly) XMPPRoster                              *xmppRoster;
-@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage               *xmppRosterStorage;
+@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage               *xmppRosterStorage;             // persistent contacts data cache
 @property (nonatomic, strong, readonly) XMPPvCardTempModule                     *xmppvCardTempModule;
 @property (nonatomic, strong, readonly) XMPPvCardAvatarModule                   *xmppvCardAvatarModule;
-@property (nonatomic, strong, readonly) XMPPvCardCoreDataStorage                *xmppvCardStorage;
+@property (nonatomic, strong, readonly) XMPPvCardCoreDataStorage                *xmppvCardStorage;              // persistent contact data cache
 @property (nonatomic, strong, readonly) XMPPMessageArchiving                    *xmppMessageArchiving;
-@property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage     *xmppMessageArchivingStorage;
+@property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage     *xmppMessageArchivingStorage;   // persistent message data cache
 
 @property (nonatomic, assign, readonly) BOOL                                    isConnected;
 

@@ -16,7 +16,7 @@
     NSString       *authPassword;
 }
 
-- (void) createStreamWithHost:(NSString*)host andPort:(UInt16)port;
+- (void)createStreamWithHost:(NSString*)host andPort:(UInt16)port;
 - (void)destroyStream;
 - (void)switchToOnline;
 - (void)switchToOffline;
@@ -68,8 +68,7 @@
 	xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
     xmppRoster.autoFetchRoster = YES;
 	xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
-	//[xmppRoster fetchRoster];
-    
+	
 	// Setup vCard support
 	xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
 	xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:xmppvCardStorage];
@@ -91,7 +90,7 @@
     [xmppMessageArchiving  activate:xmppStream];
     
     // register delegates
-    [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()]; // executes tasks on the application's main thread
     [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [xmppMessageArchiving addDelegate:self delegateQueue:dispatch_get_main_queue()];
     

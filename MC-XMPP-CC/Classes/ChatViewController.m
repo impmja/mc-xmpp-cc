@@ -64,6 +64,11 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    // Important: Must be removed if you use the keyboard within other views.
+    // It otherwise will mess up the view you use the Keyboard panning action handler in.
+    [self.view removeKeyboardControl];
+}
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -24,22 +24,21 @@
 
 #import "XMPP.h"
 
-// List the modules you're using here.
 
+// Moduls we use
+
+// Reconnect
 #import "XMPPReconnect.h"
 
+// Roster
 #import "XMPPRoster.h"
 #import "XMPPRosterCoreDataStorage.h"
 
+// XEP-0054 / XEP-0153
 #import "XMPPvCardTempModule.h"
 #import "XMPPvCardAvatarModule.h"
 #import "XMPPvCardCoreDataStorage.h"
 
-#import "XMPPCapabilities.h"
-#import "XMPPCapabilitiesCoreDataStorage.h"
-
-#import "XMPPMUC.h"
-#import "XMPPRoomCoreDataStorage.h"
-
+// XEP-0136
 #import "XMPPMessageArchiving.h"
 #import "XMPPMessageArchivingCoreDataStorage.h"

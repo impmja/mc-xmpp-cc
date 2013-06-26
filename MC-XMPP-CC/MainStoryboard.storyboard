@@ -243,7 +243,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Status: Not Connected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vV7-w5-feC">
-                                <rect key="frame" x="20" y="316" width="280" height="21"/>
+                                <rect key="frame" x="20" y="316" width="280" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -268,32 +268,6 @@
     <resources>
         <image name="bitch_please.png" width="800" height="600"/>
     </resources>
-    <classes>
-        <class className="ChatViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChatViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="noConversationView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sendButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="toolBar" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="FriendsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FriendsViewController.h"/>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onConnectClick:"/>
-                <relationship kind="outlet" name="jabberID" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="serverAddress" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="serverPort" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="status" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

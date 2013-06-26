@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #include "XMPPConnection.h"
+#import "DAKeyboardControl.h"
+
 
 //
 //  LoginViewController

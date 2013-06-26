@@ -28,7 +28,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -43,7 +43,14 @@
     self.jabberID.text = [defaults objectForKey:@"jabberID"];
     self.password.text = [defaults objectForKey:@"password"];
     
-    [self showStatus];
+    self.status.lineBreakMode = NSLineBreakByWordWrapping;
+    self.status.numberOfLines = 0;
+    
+    if ([AppDelegate sharedAppDelegate].xmppConnection != nil &&  [AppDelegate sharedAppDelegate].xmppConnection.isConnected) {
+        [self showStatus:@"Connected."];
+    } else {
+         [self showStatus:@"Not connected."];
+    }
 }
 
 - (IBAction)onConnectClick:(id)sender {
@@ -80,15 +87,19 @@
 #pragma mark - XMPPConnection Callbacks
 -(void)onXMPPConnectionFailed:(XMPPConnection *)sender withError:(NSError *)error {
     
-    [self showStatus];
+    newConnection = nil;
     
+    [self showStatus:error.localizedDescription];
+    
+    /*
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil, nil];
     [alert show];
+    */
 }
 
 -(void)onXMPPConnectionSucceeded:(XMPPConnection *)sender {
     
-    [self showStatus];
+    [self showStatus:@"Connection succeeded."];
     
     // store login data for auto login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -104,14 +115,16 @@
     [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
--(void)showStatus {
-    
-    if ([AppDelegate sharedAppDelegate].xmppConnection != nil && [AppDelegate sharedAppDelegate].xmppConnection.isConnected) {
-        self.status.text = @"Status: Connected.";
-    } else {
-        self.status.text = @"Status: Not connected.";
-    }
-}
+-(void)showStatus:(NSString*)status {
 
+    NSString * text = [NSString stringWithFormat:@"Status: %@", status];
+    CGSize stringSize = [text sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17.0] constrainedToSize:CGSizeMake(250.0f, 400.0f) lineBreakMode:NSLineBreakByWordWrapping];
+    
+    CGRect frame = self.status.frame;
+    frame.size.height = stringSize.height;
+    self.status.frame = frame;
+    
+    self.status.text = text;
+}
 
 @end
