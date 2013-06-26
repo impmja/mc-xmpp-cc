@@ -196,7 +196,8 @@
 		NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
 		[fetchRequest setEntity:entity];
 		[fetchRequest setSortDescriptors:sortDescriptors];
-		
+		[fetchRequest setFetchBatchSize:20];    // most important property ;)
+        
 		fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 		                                                               managedObjectContext:moc
 		                                                                 sectionNameKeyPath:nil
@@ -238,6 +239,7 @@
     if (self.textField.text.length > 0) {
         [self.view hideKeyboard];
     
+        // send message to the receiver jid
         [[AppDelegate sharedAppDelegate].xmppConnection sendMessage:self.textField.text toJID:_receiverJID];
         
         self.textField.text = @"";

@@ -53,8 +53,8 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		[fetchRequest setEntity:entity];
 		[fetchRequest setSortDescriptors:sortDescriptors];
-		[fetchRequest setFetchBatchSize:10];
-		
+		[fetchRequest setFetchBatchSize:20];    // most important property ;)
+        
 		fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 		                                                               managedObjectContext:moc
 		                                                                 sectionNameKeyPath:@"sectionNum"
@@ -196,8 +196,8 @@
         return;
     }
     
-    NSString * myJID = [AppDelegate sharedAppDelegate].xmppConnection.xmppStream.myJID.bare;
-    // Note: Does not work...
+    // Note: Does not work... fliters wrong..
+    //NSString * myJID = [AppDelegate sharedAppDelegate].xmppConnection.xmppStream.myJID.bare;
     //[fetchedResultsController.fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(streamBareJidStr == %@)", myJID]];
     
     NSError *error = nil;

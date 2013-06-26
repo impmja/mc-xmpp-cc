@@ -8,17 +8,10 @@
 
 #import "AppDelegate.h"
 
-#import "DDLog.h"
-#import "DDTTYLogger.h"
-
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    // Configure logging framework
-	[DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
+
     // create root navigation controller
     _rootNavigationController = [[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
     [_rootNavigationController setNavigationBarHidden:YES];
@@ -38,7 +31,6 @@
     _slidingViewController = [[ECSlidingViewController alloc] init];
     _slidingViewController.anchorLeftRevealAmount = 280.0f;
     _slidingViewController.anchorRightRevealAmount = 280.0f;
-    _slidingViewController.underRightWidthLayout = ECFixedRevealWidth;
     // setup sliding view
     _slidingViewController.topViewController = _chatViewController;
     
