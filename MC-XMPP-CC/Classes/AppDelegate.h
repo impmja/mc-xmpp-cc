@@ -17,6 +17,12 @@
 #import "XMPPConnection.h"
 
 
+//
+//  AppDelegate
+//
+//  Note: Main entry point of the APP. Does keep track of all views there are and also of the XMPPConnection
+//          as we need access to it in most views / controllers.
+//
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
 }
 
@@ -29,5 +35,8 @@
 
 @property (strong, nonatomic) XMPPConnection                *xmppConnection;
 
+
+#pragma mark - App Delegate Helper
++ (AppDelegate*) sharedAppDelegate;
 
 @end

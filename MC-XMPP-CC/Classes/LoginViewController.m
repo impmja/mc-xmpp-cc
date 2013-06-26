@@ -11,46 +11,40 @@
 
 #include "AppDelegate.h"
 
-
-@interface LoginViewController ()
-
+@interface LoginViewController() {
+    XMPPConnection  *newConnection;
+}
 @end
 
 
 @implementation LoginViewController
 
-#pragma mark Accessors
-- (AppDelegate*)appDelegate {
-	return (AppDelegate*)[[UIApplication sharedApplication] delegate];
-}
+- (void)viewDidLoad {
 
-
-- (void)viewDidLoad
-{
     [super viewDidLoad];
-    
-    self.slidingViewController.anchorLeftRevealAmount = 280.0f;
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
-    self.slidingViewController.underLeftWidthLayout = ECFullWidth;
     
     [self.password setSecureTextEntry:YES];
     [self.password setAutocorrectionType:UITextAutocorrectionTypeNo];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
     
-    self.slidingViewController.anchorLeftRevealAmount = 280.0f;
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
-    self.slidingViewController.underLeftWidthLayout = ECFullWidth;
-    
     self.serverAddress.keyboardAppearance = UIKeyboardAppearanceAlert;
     self.serverAddress.enablesReturnKeyAutomatically = YES;
+    
+    // read connection info
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.serverAddress.text = [defaults objectForKey:@"serverAddress"];
+    self.serverPort.text = [defaults objectForKey:@"serverPort"];
+    self.jabberID.text = [defaults objectForKey:@"jabberID"];
+    self.password.text = [defaults objectForKey:@"password"];
+    
+    [self showStatus];
 }
-
-
 
 - (IBAction)onConnectClick:(id)sender {
     
@@ -65,13 +59,16 @@
         jabberID != nil && jabberID.length > 0 &&
         password != nil && password.length > 0) {
         
-        [self appDelegate].xmppConnection = [[XMPPConnection alloc] initWithHost:serverAddress andPort:[serverPort intValue]];
-        [self appDelegate].xmppConnection.delegate = self;
-        [[self appDelegate].xmppConnection connectWithJID:jabberID andPassword:password];
+        // try to create a new connection.
+        // Note: Does NOT close the current one until there has being a successful connection established
+        newConnection = [[XMPPConnection alloc] initWithHost:serverAddress andPort:[serverPort intValue]];
+        newConnection.delegate = self;
+        [newConnection connectWithJID:jabberID andPassword:password];
     }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+
     if (textField.text.length > 0) {
         [self.view hideKeyboard];
         [textField resignFirstResponder];
@@ -80,12 +77,19 @@
     return NO;
 }
 
+#pragma mark - XMPPConnection Callbacks
 -(void)onXMPPConnectionFailed:(XMPPConnection *)sender withError:(NSError *)error {
+    
+    [self showStatus];
+    
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil, nil];
     [alert show];
 }
 
 -(void)onXMPPConnectionSucceeded:(XMPPConnection *)sender {
+    
+    [self showStatus];
+    
     // store login data for auto login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setValue:self.serverAddress.text forKey:@"serverAddress"];
@@ -93,7 +97,21 @@
     [defaults setValue:self.jabberID.text forKey:@"jabberID"];
     [defaults setValue:self.password.text forKey:@"password"];
     
-    [[self appDelegate].slidingViewController anchorTopViewOffScreenTo:ECRight];
+    // close the currenct connection and exchange it with the new one
+    [AppDelegate sharedAppDelegate].xmppConnection = newConnection;
+    
+    // slide login view to right
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
+
+-(void)showStatus {
+    
+    if ([AppDelegate sharedAppDelegate].xmppConnection != nil && [AppDelegate sharedAppDelegate].xmppConnection.isConnected) {
+        self.status.text = @"Status: Connected.";
+    } else {
+        self.status.text = @"Status: Not connected.";
+    }
+}
+
 
 @end

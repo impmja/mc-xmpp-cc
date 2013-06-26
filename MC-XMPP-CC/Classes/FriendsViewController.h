@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-
-@interface FriendsViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-    NSFetchedResultsController  *fetchedResultsController;
-}
-
-
+//
+//  FriendsViewController
+//
+//  Note: Is used to chat with the selected friend. It also shows the history of messages, if there are any.
+//
+@interface FriendsViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 @end

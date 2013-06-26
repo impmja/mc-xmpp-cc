@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+//
+//  FriendTableViewCell
+//
+//  Note: Used in FriendTableView for showing Friend (Contact) information
+//
 @interface FriendTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *friendImage;
-@property (weak, nonatomic) IBOutlet UILabel *friendName;
+@property (weak, nonatomic) IBOutlet UIImageView    *friendImage;
+@property (weak, nonatomic) IBOutlet UILabel        *friendName;
 
 @end

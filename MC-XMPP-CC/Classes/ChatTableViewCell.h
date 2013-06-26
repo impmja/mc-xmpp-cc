@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+//
+//  ChatTableViewCell
+//
+//  Note: Used in ChatViewController for the Sender Message
+//
 @interface ChatTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *avatarImage;
-@property (weak, nonatomic) IBOutlet UILabel *chatText;
+@property (weak, nonatomic) IBOutlet UIImageView    *avatarImage;
+@property (weak, nonatomic) IBOutlet UILabel        *chatText;
 
 @end
 

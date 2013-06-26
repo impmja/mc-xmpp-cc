@@ -14,18 +14,13 @@
 #import "ChatTableViewCellSender.h"
 
 
-@interface ChatViewController ()
-
+@interface ChatViewController() {
+    NSFetchedResultsController  *fetchedResultsController;
+}
 @end
 
+
 @implementation ChatViewController
-
-
-#pragma mark Accessors
-- (AppDelegate*)appDelegate {
-	return (AppDelegate*)[[UIApplication sharedApplication] delegate];
-}
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -34,18 +29,11 @@
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
     
-    AppDelegate *appDelegate = [self appDelegate];
-    
+    // setup sliding view
     if (![self.slidingViewController.underLeftViewController isKindOfClass:[FriendsViewController class]]) {
-        self.slidingViewController.underLeftViewController = appDelegate.friendsViewController;
+        self.slidingViewController.underLeftViewController = [AppDelegate sharedAppDelegate].friendsViewController;
     }
-    
-    self.slidingViewController.anchorLeftPeekAmount = 40;
-    self.slidingViewController.anchorLeftRevealAmount = 280.0f;
-    self.slidingViewController.anchorRightPeekAmount = 40;
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
-    
-    
+   
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
 
@@ -53,6 +41,7 @@
     self.textField.keyboardAppearance = UIKeyboardAppearanceAlert;
     self.textField.enablesReturnKeyAutomatically = YES;
     
+    // Handles the transformation of the chat box and toolbar if the keyboard is shown or hid
     __weak ChatViewController * bSelf = self;
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
         CGRect toolBarFrame = bSelf.toolBar.frame;
@@ -82,10 +71,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
+
     NSFetchedResultsController * frc = [self fetchedResultsController];
     if (frc != nil) {
         NSArray *sections = [frc sections];
-        
+        // get the rows within the current section
         if (sectionIndex < [sections count]) {
             id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
             return sectionInfo.numberOfObjects;
@@ -96,6 +86,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     XMPPMessageArchiving_Message_CoreDataObject *msg = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     NSString *cellText = msg.body;
     if (cellText == nil) {
@@ -130,12 +121,12 @@
         if (msg.body != nil) {
             cell.chatText.text = msg.body;
         } else {
-            cell.chatText.text = @"<Is typing ...>"; // TODO: Localize
+            cell.chatText.text = @"<Is typing ...>";
         }
         
-        XMPPJID * myJid = [[self appDelegate] xmppConnection].xmppStream.myJID;
+        XMPPJID * myJid = [AppDelegate sharedAppDelegate].xmppConnection.xmppStream.myJID;
         
-        cell.avatarImage.image = [[[self appDelegate] xmppConnection] findvCardImage:myJid];
+        cell.avatarImage.image = [[AppDelegate sharedAppDelegate].xmppConnection findvCardImage:myJid];
         [cell.avatarImage.layer setBorderColor: [[UIColor blackColor] CGColor]];
         [cell.avatarImage.layer setBorderWidth: 2.0];
         [cell.avatarImage setClipsToBounds:YES];
@@ -160,10 +151,9 @@
         if (msg.body != nil) {
             cell.chatText.text = msg.body;
         } else {
-            cell.chatText.text = @"<Is typing ...>"; // TODO: Localize
-        }
+            cell.chatText.text = @"<Is typing ...>";        }
         
-        cell.avatarImage.image = [[[self appDelegate] xmppConnection] findvCardImage:msg.bareJid];
+        cell.avatarImage.image = [[AppDelegate sharedAppDelegate].xmppConnection findvCardImage:msg.bareJid];
         [cell.avatarImage.layer setBorderColor: [[UIColor whiteColor] CGColor]];
         [cell.avatarImage.layer setBorderWidth: 2.0];
         [cell.avatarImage setClipsToBounds:YES];
@@ -181,7 +171,7 @@
     
     if (self.fetchedResultsController.fetchedObjects != nil && [self.fetchedResultsController.fetchedObjects count] > 0) {
         int lastRowNumber = [self.tableView numberOfRowsInSection:0] - 1;
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+        NSIndexPath * ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
         [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
 }
@@ -189,22 +179,23 @@
 
 #pragma mark NSFetchedResultsController
 - (NSFetchedResultsController *)fetchedResultsController {
-    XMPPConnection * xmppConnection = [[self appDelegate] xmppConnection];
+
+    XMPPConnection * xmppConnection = [AppDelegate sharedAppDelegate].xmppConnection;
     
+    // Create the FetchResultController if needed
 	if (fetchedResultsController == nil && xmppConnection != nil) {
-        NSManagedObjectContext *moc = [[self appDelegate] xmppConnection].messageArchivingManagedObjectContext;
+        NSManagedObjectContext * moc = xmppConnection.messageArchivingManagedObjectContext;
 		
-		NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
+        // Set Entity on which to work on
+		NSEntityDescription * entity = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
 		                                          inManagedObjectContext:moc];
 		
-		NSSortDescriptor *sd1 = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
+		NSSortDescriptor * sd = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
+		NSArray * sortDescriptors = [NSArray arrayWithObjects:sd, nil];
 		
-		NSArray *sortDescriptors = [NSArray arrayWithObjects:sd1, nil];
-		
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
 		[fetchRequest setEntity:entity];
 		[fetchRequest setSortDescriptors:sortDescriptors];
-		//[fetchRequest setFetchBatchSize:10];
 		
 		fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 		                                                               managedObjectContext:moc
@@ -231,7 +222,7 @@
 
     _receiverJID = jid;
 
-    NSString * myJID = [[self appDelegate] xmppConnection].xmppStream.myJID.bare;
+    NSString * myJID = [AppDelegate sharedAppDelegate].xmppConnection.xmppStream.myJID.bare;
     [fetchedResultsController.fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(bareJidStr == %@) AND (streamBareJidStr == %@)", _receiverJID, myJID]];
     
     NSError *error = nil;
@@ -240,13 +231,6 @@
     } else {
         [self controllerDidChangeContent:fetchedResultsController];
     }
-    
-    if (_receiverJID != nil) {
-       [self showChatTableView:YES];
-       [self scrollToBottom];
-    } else {
-       [self showChatTableView:NO];
-    }
 }
 
 
@@ -254,7 +238,7 @@
     if (self.textField.text.length > 0) {
         [self.view hideKeyboard];
     
-        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:_receiverJID];
+        [[AppDelegate sharedAppDelegate].xmppConnection sendMessage:self.textField.text toJID:_receiverJID];
         
         self.textField.text = @"";
     }
@@ -264,7 +248,7 @@
     if (self.textField.text.length > 0) {
         [self.view hideKeyboard];
     
-        [[[self appDelegate] xmppConnection] sendMessage:self.textField.text toJID:_receiverJID];
+        [[AppDelegate sharedAppDelegate].xmppConnection sendMessage:self.textField.text toJID:_receiverJID];
         
         self.textField.text = @"";
         
@@ -277,8 +261,8 @@
 
 -(void)showChatTableView:(BOOL)show {
     [self.noConversationView setHidden:show];
-    //[self.tableView setHidden:!show];
-    //[self.toolBar setHidden:!show];
+    [self.tableView setHidden:!show];
+    [self.toolBar setHidden:!show];
 }
 
 

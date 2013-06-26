@@ -12,20 +12,22 @@
 #import "DAKeyboardControl.h"
 
 
-// Chat Messages in History speichern/laden: http://stackoverflow.com/questions/8568910/storing-messages-using-xmppframework-for-ios
-
 // Messages parsen: http://stackoverflow.com/questions/14628078/going-through-text-parsing-links
 
-@interface ChatViewController : UIViewController <NSFetchedResultsControllerDelegate> {
-    NSFetchedResultsController  *fetchedResultsController;
-}
 
-@property (nonatomic, strong) NSString                  *receiverJID;
+//
+//  ChatViewController
+//
+//  Note: Is used to chat with the selected friend. It also shows the history of messages, if there are any.
+//
+@interface ChatViewController : UIViewController <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, copy) NSString                    *receiverJID;
 
 @property (weak, nonatomic) IBOutlet UITableView        *tableView;
 @property (weak, nonatomic) IBOutlet UIView             *toolBar;
 @property (weak, nonatomic) IBOutlet UIButton           *sendButton;
 @property (weak, nonatomic) IBOutlet UITextField        *textField;
-@property (weak, nonatomic) IBOutlet UIView *noConversationView;
+@property (weak, nonatomic) IBOutlet UIView             *noConversationView;
 
 @end

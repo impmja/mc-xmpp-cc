@@ -12,39 +12,32 @@
 #include "FriendTableViewCell.h"
 
 
-@interface FriendsViewController () 
+@interface FriendsViewController () {
+    NSFetchedResultsController  *fetchedResultsController;
+}
 @end
 
 
 @implementation FriendsViewController
 
-#pragma mark Accessors
-- (AppDelegate*)appDelegate {
-	return (AppDelegate*)[[UIApplication sharedApplication] delegate];
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
-    self.slidingViewController.underRightWidthLayout = ECFullWidth;
-    
+
+    // slide chat view to right
     [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.slidingViewController.anchorRightRevealAmount = 280.0f;
-    self.slidingViewController.underRightWidthLayout = ECFullWidth;
-    
-    [self.tableView reloadData];
+
+    [self setFriendListOwnerJID: [AppDelegate sharedAppDelegate].xmppConnection.xmppStream.myJID.bare];
 }
 
 
 #pragma mark NSFetchedResultsController
 - (NSFetchedResultsController *)fetchedResultsController {
-    // Check if there is a connection & only then create the fetch controller
-    XMPPConnection * xmppConnection = [[self appDelegate] xmppConnection];
+
+    // Check if there is a connection and only then create the fetch controller otherewise show only the options menu
+    XMPPConnection * xmppConnection = [AppDelegate sharedAppDelegate].xmppConnection;
     
 	if (fetchedResultsController == nil && xmppConnection != nil) {
 		NSManagedObjectContext *moc = xmppConnection.rosterManagedObjectContext;
@@ -68,11 +61,8 @@
 		                                                                          cacheName:nil];
 		[fetchedResultsController setDelegate:self];
 		
-		NSError *error = nil;
-		if (![fetchedResultsController performFetch:&error]) {
-			NSLog(@"Error performing fetch: %@", error);
-		}
-	}
+        [self setFriendListOwnerJID: [AppDelegate sharedAppDelegate].xmppConnection.xmppStream.myJID.bare];
+    }
 	
 	return fetchedResultsController;
 }
@@ -83,6 +73,7 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
     NSFetchedResultsController * frc = [self fetchedResultsController];
     if (frc != nil) {
         return [[frc sections] count] + 1; // +1 for Options
@@ -95,8 +86,8 @@
     return 40.0f;
 }
 
-// Change section header colors
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(00, 0, tableView.bounds.size.width, 40)];
     [headerView setBackgroundColor:[UIColor blackColor]];
     
@@ -121,6 +112,7 @@
         }
     }
     
+    // Change section header font and color
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, tableView.bounds.size.width - 10, 30)];
     label.text = headerText;
     label.font = [UIFont fontWithName:@"Helvetica" size:30.0f];
@@ -148,6 +140,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    // create specific friend view cell
     FriendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FriendCell"];
     if (cell == nil) {
         NSArray * nib = [[NSBundle mainBundle] loadNibNamed:@"FriendTableViewCell" owner:nil options:nil];
@@ -184,7 +177,7 @@
             }
         }
         
-         cell.friendImage.image = [[[self appDelegate] xmppConnection] findvCardImage:user.jid];
+         cell.friendImage.image = [[AppDelegate sharedAppDelegate].xmppConnection findvCardImage:user.jid];
 	} else {
         cell.friendName.text = @"Login";
         cell.friendImage.image = [UIImage imageNamed:@"settings.png"];
@@ -196,33 +189,54 @@
 	return cell;
 }
 
+#pragma mark Setter
+-(void)setFriendListOwnerJID:(NSString *)jid {
+
+    if (fetchedResultsController == nil) {
+        return;
+    }
+    
+    NSString * myJID = [AppDelegate sharedAppDelegate].xmppConnection.xmppStream.myJID.bare;
+    // Note: Does not work...
+    //[fetchedResultsController.fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(streamBareJidStr == %@)", myJID]];
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"Error performing fetch: %@", error);
+    } else {
+        [self controllerDidChangeContent:fetchedResultsController];
+    }
+}
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSFetchedResultsController * frc = [self fetchedResultsController];
     
-    // get the selected user & set it as a filter for the chat
+    // get the selected user and set it as a filter for the chat
     if (frc != nil && indexPath.section < [frc sections].count) {
         XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
-        [[self appDelegate].chatViewController setReceiverJID:[user.jid full]];
+        [[AppDelegate sharedAppDelegate].chatViewController setReceiverJID:[user.jid full]];
         
+        // slide to chat view
         [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
              CGRect frame = self.slidingViewController.topViewController.view.frame;
-            self.slidingViewController.topViewController = [self appDelegate].chatViewController;
+            self.slidingViewController.topViewController = [AppDelegate sharedAppDelegate].chatViewController;
             self.slidingViewController.topViewController.view.frame = frame;
             [self.slidingViewController resetTopView];
         }];
     } else {
+        // slide to login view
         [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
             CGRect frame = self.slidingViewController.topViewController.view.frame;
-            self.slidingViewController.topViewController = [self appDelegate].loginViewController;
+            self.slidingViewController.topViewController = [AppDelegate sharedAppDelegate].loginViewController;
             self.slidingViewController.topViewController.view.frame = frame;
             [self.slidingViewController resetTopView];
         }];
     }
     
+    // change image border to selcted state
     FriendTableViewCell * cell = (FriendTableViewCell*)  [tableView cellForRowAtIndexPath:indexPath];
     [cell.friendImage.layer setBorderColor: [[UIColor whiteColor] CGColor]];
     [cell.friendImage.layer setBorderWidth: 2.0];
@@ -230,6 +244,8 @@
 
 
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // change image border to deselected state
     FriendTableViewCell * cell = (FriendTableViewCell*)  [tableView cellForRowAtIndexPath:indexPath];
     [cell.friendImage.layer setBorderColor: [[UIColor blackColor] CGColor]];
     [cell.friendImage.layer setBorderWidth: 2.0];
