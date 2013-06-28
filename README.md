@@ -5,36 +5,20 @@
 
 ## Features
 
-* TODO: Multi User Chat
-* TODO: Multi User Account Handling
-* ...
+* Chatting with a single Person
+* Connecting to different XMPP Server
+* Contact list
 
 
 ## Requirements
 
-* iOS 5
-* ARC
-* 
+* iOS 6
+* Xcode 4.5
 
-## Presentation
-
-live demo mit freiwilligen
-
-xmpp , was ist das , wer benutzt das
-
-unser programm , was haben wir benutzt
-
-unser code wie haben wir xmpp benutzt schnitstellen bla
-
-unser code wie haben wir slidingmenu benutzt
-
-unser code wie haben wir tastatur
-
-interpreation von links (bildern vorladen beim scrollen etc)
 
 
 ## MIT License
-Copyright (C) 2012 Jan Schulte & Florian Kaluschke
+Copyright (C) 2013 Jan Schulte & Florian Kaluschke
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
