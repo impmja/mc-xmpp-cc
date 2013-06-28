@@ -16,6 +16,12 @@
 * Xcode 4.5
 
 
+## Submodules
+
+* XMPPFramework https://github.com/robbiehanson/XMPPFramework
+* ECSlidingViewController https://github.com/edgecase/ECSlidingViewController
+* DAKeyboardControl https://github.com/danielamitay/DAKeyboardControl
+
 
 ## MIT License
 Copyright (C) 2013 Jan Schulte & Florian Kaluschke
